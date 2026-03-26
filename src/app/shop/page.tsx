@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Star, ShoppingBag } from "@phosphor-icons/react";
 import { products, type Product } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
+import { FlavorBundleBuilder } from "@/components/shop/FlavorBundleBuilder";
 
 type Filter = "all" | "shakes" | "bundles";
 
@@ -66,7 +67,14 @@ export default function ShopPage() {
         <div className="horizon-line mt-16" />
       </section>
 
-      {/* Filters + Grid */}
+      {/* Ka'Chava-style Bundle Builder */}
+      <FlavorBundleBuilder />
+
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+        <div className="horizon-line" />
+      </div>
+
+      {/* Individual Products Grid */}
       <section className="py-12 md:py-20">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
           {/* Filter tabs */}
