@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "/", label: "HOME" },
   { href: "/shop", label: "SHOP" },
   { href: "/recipes", label: "RECIPES" },
+  { href: "/podcast", label: "PODCAST" },
   { href: "/about", label: "ABOUT" },
   { href: "/faq", label: "FAQ" },
 ];
