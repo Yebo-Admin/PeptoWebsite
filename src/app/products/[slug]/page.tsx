@@ -252,16 +252,15 @@ export default function ProductPage() {
                           </div>
                           <div>
                             <p className="text-sm font-bold text-[#1A1A1A]">Subscribe & Save</p>
-                            <p className="text-xs text-gray-400">15 servings</p>
+                            <p className="text-xs text-gray-400">1 serving per sachet</p>
                           </div>
                         </div>
                         <div className="text-right">
                           <p className="text-sm">
                             <span className="text-gray-400 line-through mr-1">R{product.price}</span>
                             <span className="font-black text-[#1A1A1A]">R{product.subscriptionPrice}</span>
-                            <span className="text-xs text-gray-400"> / bag</span>
+                            <span className="text-xs text-gray-400"> / sachet</span>
                           </p>
-                          <p className="text-xs text-gray-400">R{(product.subscriptionPrice / 15).toFixed(2)} / serving</p>
                         </div>
                       </div>
                       {isSubscription && (
@@ -298,14 +297,13 @@ export default function ProductPage() {
                         </div>
                         <div>
                           <p className="text-sm font-bold text-[#1A1A1A]">One-time purchase</p>
-                          <p className="text-xs text-gray-400">15 servings</p>
+                          <p className="text-xs text-gray-400">1 serving per sachet</p>
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-black text-[#1A1A1A]">
-                          R{product.price}<span className="text-xs text-gray-400 font-normal"> / bag</span>
+                          R{product.price}<span className="text-xs text-gray-400 font-normal"> / sachet</span>
                         </p>
-                        <p className="text-xs text-gray-400">R{(product.price / 15).toFixed(2)} / serving</p>
                       </div>
                     </div>
                   </button>
