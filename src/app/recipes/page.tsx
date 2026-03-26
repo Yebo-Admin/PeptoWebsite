@@ -71,6 +71,29 @@ export default function RecipesPage() {
         <div className="horizon-line mt-16" />
       </section>
 
+      {/* Recipe Animation Video */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-3xl mx-auto px-4 md:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="rounded-3xl overflow-hidden shadow-xl"
+          >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full"
+            >
+              <source src="/images/recipe-animation.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
+        </div>
+      </section>
+
       {/* How-To Section */}
       <section className="py-16 md:py-20">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
@@ -209,10 +232,10 @@ export default function RecipesPage() {
             className="mt-16 p-8 md:p-12 bg-[#006D77] rounded-3xl text-center"
           >
             <h3 className="text-2xl font-black tracking-tighter text-white">
-              GET WEEKLY RECIPE DROPS
+              GET MONTHLY RECIPE DROPS
             </h3>
             <p className="mt-2 text-base text-white/60 max-w-md mx-auto">
-              New PeptoMeal recipes delivered to your inbox every week.
+              New PeptoMeal recipes delivered to your inbox every month.
             </p>
             <form
               className="flex gap-3 max-w-md mx-auto mt-6"
