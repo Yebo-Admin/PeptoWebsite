@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Star, ArrowRight } from "@phosphor-icons/react";
 import { products } from "@/data/products";
 
-const shakes = products.filter((p) => p.category === "shake").slice(0, 4);
+const favourites = products.filter((p) => p.isFavourite);
 
 export function FeaturedFlavours() {
   return (
@@ -24,21 +24,21 @@ export function FeaturedFlavours() {
               OUR FLAVOURS
             </p>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-[#1A1A1A]">
-              FIND YOUR <span className="text-[#006D77]">FUEL</span>
+              Customer <span className="text-[#006D77]">favourites</span>
             </h2>
           </motion.div>
           <Link
             href="/shop"
             className="inline-flex items-center gap-1.5 text-sm font-black tracking-[0.15em] text-[#006D77] hover:text-[#006D77]/80 transition-colors uppercase"
           >
-            VIEW ALL
+            DISCOVER ALL FLAVOURS
             <ArrowRight size={16} weight="bold" />
           </Link>
         </div>
 
         {/* Product grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {shakes.map((product, index) => (
+          {favourites.map((product, index) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 30 }}
@@ -52,7 +52,7 @@ export function FeaturedFlavours() {
                 <div className="relative aspect-[3/4] bg-[#F1F1E6] rounded-2xl overflow-hidden mb-4">
                   <Image
                     src={product.image}
-                    alt={`PeptoMeal ${product.name}`}
+                    alt={`PeptoMeal ${product.flavor}`}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
@@ -90,9 +90,9 @@ export function FeaturedFlavours() {
                   </span>
                 </div>
 
-                {/* Name & tagline */}
+                {/* Flavor name */}
                 <h3 className="font-black text-[#1A1A1A] tracking-tight text-lg">
-                  {product.name}
+                  {product.flavor}
                 </h3>
                 <p className="text-sm text-[#1A1A1A]/50 mt-1">
                   {product.tagline}
@@ -114,6 +114,26 @@ export function FeaturedFlavours() {
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom text */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center mt-14"
+        >
+          <p className="text-lg text-[#1A1A1A]/50 mb-6">
+            10 delicious flavours to explore.
+          </p>
+          <Link
+            href="/shop"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-[#006D77] font-black text-sm tracking-[0.15em] uppercase rounded-full border-2 border-[#006D77]/30 hover:border-[#006D77] transition-all"
+          >
+            DISCOVER ALL FLAVOURS
+            <ArrowRight size={16} weight="bold" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

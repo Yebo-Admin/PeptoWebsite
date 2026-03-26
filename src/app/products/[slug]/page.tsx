@@ -12,17 +12,32 @@ import {
   Star,
   ShieldCheck,
   CheckCircle,
+  CaretDown,
+  Truck,
+  Package,
+  Heart,
+  Barbell,
+  Pill,
+  Leaf,
+  Fire,
 } from "@phosphor-icons/react";
 import { getProductBySlug, products } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
 
-type Tab = "benefits" | "ingredients" | "nutrition" | "reviews";
+type InfoSection = "whats-inside" | "taste" | "shipping";
 
-const tabs: { value: Tab; label: string }[] = [
-  { value: "benefits", label: "BENEFITS" },
-  { value: "ingredients", label: "INGREDIENTS" },
-  { value: "nutrition", label: "NUTRITION" },
-  { value: "reviews", label: "REVIEWS" },
+const infoSections: { value: InfoSection; label: string }[] = [
+  { value: "whats-inside", label: "What's Inside" },
+  { value: "taste", label: "Taste" },
+  { value: "shipping", label: "Shipping" },
+];
+
+const keyBenefits = [
+  { icon: Heart, label: "Balanced nutrition" },
+  { icon: Barbell, label: "Protein for strength & recovery" },
+  { icon: Pill, label: "Vitamins & minerals for energy" },
+  { icon: Leaf, label: "Gut health support" },
+  { icon: Fire, label: "Low in calories" },
 ];
 
 export default function ProductPage() {
@@ -31,7 +46,7 @@ export default function ProductPage() {
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
-  const [activeTab, setActiveTab] = useState<Tab>("benefits");
+  const [openSection, setOpenSection] = useState<InfoSection | null>(null);
   const [isSubscription, setIsSubscription] = useState(true);
 
   if (!product) {
@@ -51,10 +66,14 @@ export default function ProductPage() {
   }
 
   const relatedProducts = products
-    .filter((p) => p.id !== product.id)
+    .filter((p) => p.id !== product.id && p.category === "shake")
     .slice(0, 3);
 
   const activePrice = isSubscription ? product.subscriptionPrice : product.price;
+
+  const toggleSection = (section: InfoSection) => {
+    setOpenSection((prev) => (prev === section ? null : section));
+  };
 
   return (
     <div className="bg-[#F1F1E6]">
@@ -70,11 +89,11 @@ export default function ProductPage() {
               Shop
             </Link>
             <span>/</span>
-            <span className="text-[#1A1A1A]">{product.name}</span>
+            <span className="text-[#1A1A1A]">{product.flavor}</span>
           </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-            {/* Left: Sticky Image */}
+            {/* ── LEFT: Product Images ── */}
             <div className="lg:sticky lg:top-24 lg:self-start space-y-4">
               <motion.div
                 key={activeImage}
@@ -84,18 +103,16 @@ export default function ProductPage() {
               >
                 <Image
                   src={product.images[activeImage]}
-                  alt={`PeptoMeal ${product.name}`}
+                  alt={`PeptoMeal ${product.flavor}`}
                   fill
                   className="object-cover"
                   priority
                 />
-                {/* Badge */}
                 {product.badge && (
                   <span className="absolute top-5 left-5 px-3 py-1.5 bg-[#006D77] text-white text-xs font-bold rounded-full tracking-wider">
                     {product.badge}
                   </span>
                 )}
-                {/* Guarantee badge */}
                 <div className="absolute bottom-5 right-5 flex items-center gap-2 px-3 py-2 bg-white/90 backdrop-blur-sm rounded-full">
                   <ShieldCheck size={16} weight="fill" className="text-[#006D77]" />
                   <span className="text-[10px] font-bold tracking-wider text-[#1A1A1A]">
@@ -124,19 +141,22 @@ export default function ProductPage() {
               )}
             </div>
 
-            {/* Right: Product Info */}
+            {/* ── RIGHT: Purchase Info ── */}
             <div>
-              {/* Category label */}
+              {/* 1. Product title */}
               <p className="text-xs font-bold tracking-[0.3em] text-[#006D77] uppercase">
                 PEPTOMEAL {product.category === "bundle" ? "BUNDLE" : "SHAKE"}
               </p>
-
-              {/* Product name */}
-              <h1 className="mt-3 text-4xl sm:text-5xl font-black tracking-tighter text-[#1A1A1A]">
-                {product.name}
+              <h1 className="mt-3 text-3xl sm:text-4xl font-black tracking-tighter text-[#1A1A1A]">
+                PeptoMeal All-In-1 Nutritional Support
               </h1>
 
-              {/* Star rating */}
+              {/* 2. Flavour subtitle */}
+              <p className="mt-2 text-xl font-bold text-[#006D77]">
+                {product.flavor}
+              </p>
+
+              {/* 3. Star rating */}
               <div className="flex items-center gap-2 mt-3">
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -157,33 +177,34 @@ export default function ProductPage() {
                 </span>
               </div>
 
-              {/* Horizon line */}
+              {/* 4. Horizon line */}
               <div className="horizon-line my-6" />
 
-              {/* Description */}
+              {/* 5. Short description */}
               <p className="text-base text-gray-600 leading-relaxed">
-                {product.description}
+                Complete daily nutrition in a smooth, delicious shake designed to support energy, recovery and everyday wellbeing.
               </p>
 
-              {/* 3-col stat grid */}
-              <div className="grid grid-cols-3 gap-3 mt-6">
-                {[
-                  { value: `${product.proteinG}g`, label: "PROTEIN" },
-                  { value: `${product.servings}`, label: "SERVINGS" },
-                  { value: `${product.calories}`, label: "CALORIES" },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="bg-white rounded-xl p-4 text-center"
-                  >
-                    <p className="text-2xl font-black text-[#006D77] tracking-tight">
-                      {stat.value}
-                    </p>
-                    <p className="text-[10px] font-bold tracking-[0.2em] text-gray-400 mt-1">
-                      {stat.label}
-                    </p>
+              {/* 6. Key benefits */}
+              <div className="mt-6 space-y-3">
+                {keyBenefits.map((benefit) => (
+                  <div key={benefit.label} className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-[#006D77]/10 flex items-center justify-center shrink-0">
+                      <benefit.icon size={16} weight="bold" className="text-[#006D77]" />
+                    </div>
+                    <span className="text-sm text-gray-600">{benefit.label}</span>
                   </div>
                 ))}
+              </div>
+
+              {/* 7. Flavour Profile */}
+              <div className="mt-8 p-5 bg-white rounded-2xl">
+                <p className="text-xs font-bold tracking-[0.2em] text-[#1A1A1A] uppercase mb-2">
+                  Flavour Profile
+                </p>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  {product.flavorProfile}
+                </p>
               </div>
 
               {/* Subscription toggle */}
@@ -251,142 +272,176 @@ export default function ProductPage() {
                 </button>
               </div>
 
-              {/* Quantity + CTA */}
-              <div className="flex items-center gap-4 mt-6">
-                <div className="flex items-center gap-3 border border-gray-200 rounded-full bg-white px-1">
+              {/* 8. Choose Quantity + 9. Add to Cart */}
+              <div className="mt-6">
+                <p className="text-xs font-bold tracking-[0.2em] text-[#1A1A1A] uppercase mb-3">
+                  Choose Quantity
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 border border-gray-200 rounded-full bg-white px-1">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors"
+                      aria-label="Decrease quantity"
+                    >
+                      <Minus size={14} weight="bold" />
+                    </button>
+                    <span className="text-sm font-bold w-6 text-center">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors"
+                      aria-label="Increase quantity"
+                    >
+                      <Plus size={14} weight="bold" />
+                    </button>
+                  </div>
+
                   <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors"
-                    aria-label="Decrease quantity"
+                    onClick={() => addItem(product, quantity)}
+                    className="flex-1 inline-flex items-center justify-center gap-2 py-4 bg-[#FFB703] hover:bg-[#FFC733] text-[#1A1A1A] font-bold tracking-wider rounded-full transition-all active:scale-[0.98]"
                   >
-                    <Minus size={14} weight="bold" />
-                  </button>
-                  <span className="text-sm font-bold w-6 text-center">
-                    {quantity}
-                  </span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors"
-                    aria-label="Increase quantity"
-                  >
-                    <Plus size={14} weight="bold" />
+                    <ShoppingBag size={18} weight="bold" />
+                    ADD TO CART — R{activePrice * quantity}
                   </button>
                 </div>
-
-                <button
-                  onClick={() => addItem(product, quantity)}
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-4 bg-[#FFB703] hover:bg-[#FFC733] text-[#1A1A1A] font-bold tracking-wider rounded-full transition-all active:scale-[0.98] animate-pulse-gold"
-                >
-                  <ShoppingBag size={18} weight="bold" />
-                  ADD TO CART — R{activePrice * quantity}
-                </button>
               </div>
 
-              {/* Tabs */}
-              <div className="mt-10">
-                <div className="flex gap-2 overflow-x-auto pb-2">
-                  {tabs.map((tab) => (
-                    <button
-                      key={tab.value}
-                      onClick={() => setActiveTab(tab.value)}
-                      className={`px-4 py-2 text-[11px] font-bold tracking-wider rounded-full whitespace-nowrap transition-all ${
-                        activeTab === tab.value
-                          ? "bg-[#006D77] text-white"
-                          : "bg-white text-gray-500 hover:bg-gray-100"
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
+              {/* 10. Trust strip */}
+              <div className="flex items-center justify-center gap-6 mt-6 py-4 border-t border-gray-200">
+                <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                  <ShieldCheck size={16} className="text-[#006D77]" />
+                  <span className="font-bold tracking-wider">Secure Checkout</span>
                 </div>
+                <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                  <Truck size={16} className="text-[#006D77]" />
+                  <span className="font-bold tracking-wider">Fast Shipping</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                  <Package size={16} className="text-[#006D77]" />
+                  <span className="font-bold tracking-wider">Quality & Safety</span>
+                </div>
+              </div>
 
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeTab}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="mt-6"
-                  >
-                    {activeTab === "benefits" && (
-                      <ul className="space-y-3">
-                        {product.benefits.map((benefit, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <CheckCircle
-                              size={20}
-                              weight="fill"
-                              className="text-[#006D77] mt-0.5 shrink-0"
-                            />
-                            <span className="text-sm text-gray-600 leading-relaxed">
-                              {benefit}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+              {/* ── Dropdown/Tab Sections ── */}
+              <div className="mt-8 space-y-2">
+                {infoSections.map((section) => {
+                  const isOpen = openSection === section.value;
+                  return (
+                    <div
+                      key={section.value}
+                      className="bg-white rounded-2xl overflow-hidden"
+                    >
+                      <button
+                        onClick={() => toggleSection(section.value)}
+                        className="w-full flex items-center justify-between p-5 text-left"
+                      >
+                        <span className="text-sm font-bold text-[#1A1A1A]">
+                          {section.label}
+                        </span>
+                        <CaretDown
+                          size={16}
+                          weight="bold"
+                          className={`text-gray-400 transition-transform duration-300 ${
+                            isOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
 
-                    {activeTab === "ingredients" && (
-                      <p className="text-sm text-gray-600 leading-relaxed">
-                        {product.ingredients}
-                      </p>
-                    )}
-
-                    {activeTab === "nutrition" && (
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          { label: "Protein", value: `${product.proteinG}g` },
-                          { label: "Calories", value: `${product.calories}` },
-                          { label: "Servings", value: `${product.servings}` },
-                          { label: "Category", value: product.category === "shake" ? "Shake" : "Bundle" },
-                        ].map((item) => (
-                          <div
-                            key={item.label}
-                            className="p-4 bg-white rounded-xl"
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
                           >
-                            <p className="text-lg font-black text-[#006D77]">
-                              {item.value}
-                            </p>
-                            <p className="text-xs text-gray-500 mt-1">
-                              {item.label}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                            <div className="px-5 pb-5">
+                              {section.value === "whats-inside" && (
+                                <div>
+                                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                                    PeptoMeal combines high-quality protein, essential vitamins and minerals and digestive support nutrients to help provide balanced daily nutrition. Each serving is designed to help support:
+                                  </p>
+                                  <ul className="space-y-2 mb-6">
+                                    {[
+                                      "Energy",
+                                      "Recovery",
+                                      "Muscle maintenance",
+                                      "Digestive health",
+                                      "Healthy weight management",
+                                    ].map((item) => (
+                                      <li key={item} className="flex items-center gap-2">
+                                        <CheckCircle
+                                          size={16}
+                                          weight="fill"
+                                          className="text-[#006D77] shrink-0"
+                                        />
+                                        <span className="text-sm text-gray-600">{item}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
 
-                    {activeTab === "reviews" && (
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                          <div className="flex gap-0.5">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <Star
-                                key={i}
-                                size={18}
-                                weight="fill"
-                                className="text-[#FFB703]"
-                              />
-                            ))}
-                          </div>
-                          <span className="text-sm font-bold text-[#1A1A1A]">
-                            {product.rating} out of 5
-                          </span>
-                          <span className="text-sm text-gray-400">
-                            ({product.reviewCount} reviews)
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-500">
-                          Verified customers love this product. Full reviews coming soon.
-                        </p>
-                      </div>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
+                                  {/* Nutrition stats grid */}
+                                  <div className="grid grid-cols-3 gap-3">
+                                    {[
+                                      { value: `${product.nutrition.calories}`, label: "Calories" },
+                                      { value: product.nutrition.protein, label: "Protein" },
+                                      { value: product.nutrition.fibre, label: "Fibre" },
+                                      { value: product.nutrition.sugar, label: "Sugar" },
+                                      { value: product.nutrition.servingSize, label: "Serving Size" },
+                                      { value: `${product.nutrition.vitamins}`, label: "Vitamins" },
+                                    ].map((stat) => (
+                                      <div
+                                        key={stat.label}
+                                        className="bg-[#F1F1E6] rounded-xl p-3 text-center"
+                                      >
+                                        <p className="text-lg font-black text-[#006D77] tracking-tight">
+                                          {stat.value}
+                                        </p>
+                                        <p className="text-[10px] font-bold tracking-[0.15em] text-gray-400 mt-0.5 uppercase">
+                                          {stat.label}
+                                        </p>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {section.value === "taste" && (
+                                <div>
+                                  <h4 className="text-base font-black text-[#1A1A1A] tracking-tight mb-2">
+                                    Taste You&apos;ll Actually Enjoy
+                                  </h4>
+                                  <p className="text-sm text-gray-600 leading-relaxed">
+                                    Nutrition should never feel like a chore. PeptoMeal flavours are designed to be smooth, satisfying and easy to enjoy — making it simple to keep your daily nutrition routine consistent.
+                                  </p>
+                                </div>
+                              )}
+
+                              {section.value === "shipping" && (
+                                <div>
+                                  <h4 className="text-base font-black text-[#1A1A1A] tracking-tight mb-2">
+                                    Shipping Information
+                                  </h4>
+                                  <p className="text-sm text-gray-600 leading-relaxed">
+                                    Orders are processed within 1-2 business days. Delivery times vary depending on location but typically arrive within 2-5 working days nationwide. Shipping costs are calculated at checkout.
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
 
-          {/* Related Products */}
+          {/* ── Related Products ── */}
           <div className="mt-20">
             <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase mb-2">
               MORE OPTIONS
@@ -410,16 +465,17 @@ export default function ProductPage() {
                     <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-[#F1F1E6]">
                       <Image
                         src={p.image}
-                        alt={p.name}
+                        alt={p.flavor}
                         fill
                         className="object-cover"
                       />
                     </div>
                     <div>
                       <h3 className="font-bold text-[#1A1A1A] group-hover:text-[#006D77] transition-colors">
-                        {p.name}
+                        {p.flavor}
                       </h3>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-500 mt-0.5">{p.tagline}</p>
+                      <p className="text-sm font-bold text-[#1A1A1A] mt-1">
                         From R{p.subscriptionPrice}
                       </p>
                     </div>

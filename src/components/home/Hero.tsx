@@ -59,20 +59,26 @@ export function Hero() {
             <div className="inline-flex items-center gap-2 px-5 py-2 bg-[#FFB703]/10 rounded-full border border-[#FFB703]/30 mb-8">
               <span className="w-2 h-2 rounded-full bg-[#FFB703] animate-pulse" />
               <span className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase">
-                30-DAY LOVE-IT GUARANTEE
+                COMPLETE NUTRITION
               </span>
             </div>
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.9] text-white">
-              BIOLOGICAL
+              Better Nutrition.
               <br />
-              <span className="text-[#FFB703]">FUEL</span>
+              <span className="text-[#FFB703]">One Shake A Day.</span>
             </h1>
 
             <div className="horizon-line my-8 max-w-[200px]" />
 
-            <p className="text-lg text-white/60 leading-relaxed max-w-[45ch]">
-              30g protein. 85+ superfoods. Zero compromises.
+            <p className="text-lg text-white/70 leading-relaxed max-w-[50ch]">
+              PeptoMeal is a complete nutritional shake designed to support
+              energy, recovery and daily wellbeing — in one convenient serving.
+            </p>
+
+            <p className="text-sm text-white/40 leading-relaxed max-w-[50ch] mt-4">
+              Because sometimes your body needs more than what your meals can
+              provide.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-10">
@@ -80,13 +86,13 @@ export function Hero() {
                 href="/shop"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FFB703] text-[#1A1A1A] font-black text-sm tracking-[0.15em] uppercase rounded-full hover:bg-[#FFB703]/90 transition-all active:scale-[0.98] shadow-[0_8px_30px_-6px_rgba(255,183,3,0.35)]"
               >
-                SHOP FLAVOURS
+                SHOP PEPTOMEAL
               </Link>
               <Link
-                href="/about"
+                href="/shop"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent text-white font-black text-sm tracking-[0.15em] uppercase rounded-full border-2 border-white/30 hover:border-white/60 transition-all"
               >
-                HOW TO MIX
+                EXPLORE FLAVOURS
               </Link>
             </div>
           </motion.div>
@@ -121,10 +127,10 @@ export function Hero() {
               className="absolute bottom-[15%] left-[5%] px-5 py-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20"
             >
               <p className="text-3xl font-black text-[#FFB703] tracking-tighter">
-                30g
+                110
               </p>
               <p className="text-xs font-bold tracking-[0.3em] text-white/70 uppercase">
-                PLANT PROTEIN
+                CALORIES
               </p>
             </motion.div>
           </motion.div>

@@ -17,14 +17,14 @@ export default function TestimonialsPage() {
             transition={{ duration: 0.7 }}
           >
             <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase mb-4">
-              REAL PEOPLE. REAL RESULTS.
+              TESTIMONIALS
             </p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white">
-              WHAT OUR CUSTOMERS{" "}
-              <span className="text-[#006D77]">SAY</span>
+              REAL EXPERIENCES WITH{" "}
+              <span className="text-[#006D77]">PEPTOMEAL</span>
             </h1>
             <p className="mt-4 text-base text-white/50 max-w-lg mx-auto">
-              Honest reviews from busy professionals, athletes, and health-conscious adults across South Africa.
+              People use PeptoMeal in different ways &mdash; from busy professionals needing quick nutrition to individuals supporting their health and wellness journeys. Here&apos;s what our community has to say about making PeptoMeal part of their daily routine.
             </p>
           </motion.div>
 

@@ -57,14 +57,14 @@ export default function RecipesPage() {
             transition={{ duration: 0.7 }}
           >
             <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase mb-4">
-              BEYOND THE SHAKE
+              PEPTOMEAL RECIPES
             </p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white">
-              PEPTOMEAL{" "}
-              <span className="text-[#006D77]">RECIPES</span>
+              CREATIVE WAYS TO ENJOY{" "}
+              <span className="text-[#006D77]">PEPTOMEAL</span>
             </h1>
-            <p className="mt-4 text-base text-white/50 max-w-md mx-auto">
-              Bowls, smoothies, popsicles, puddings — discover new ways to enjoy your daily nutrition.
+            <p className="mt-4 text-base text-white/50 max-w-lg mx-auto">
+              PeptoMeal isn&apos;t just a shake &mdash; it&apos;s a versatile ingredient that can be used in a variety of recipes. From smoothies and breakfast bowls to healthy snacks and desserts, PeptoMeal can be easily incorporated into your daily routine. Explore simple recipes that help you enjoy balanced nutrition in new and delicious ways.
             </p>
           </motion.div>
         </div>

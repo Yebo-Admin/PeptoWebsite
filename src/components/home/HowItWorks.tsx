@@ -1,30 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Funnel, Drop, Coffee } from "@phosphor-icons/react";
+import { Drop, Shuffle, Coffee, Sun, Clock, PersonSimpleRun, Lightning } from "@phosphor-icons/react";
 
 const steps = [
   {
-    icon: Funnel,
+    icon: Drop,
     number: "01",
-    title: "SCOOP & POUR",
-    description:
-      "Add one level scoop of PeptoMeal to 300ml of cold water in your shaker.",
+    title: "ADD WATER",
   },
   {
-    icon: Drop,
+    icon: Shuffle,
     number: "02",
-    title: "SHAKE 20 SEC",
-    description:
-      "Seal the lid and shake vigorously for 20 seconds until smooth and creamy.",
+    title: "SHAKE",
   },
   {
     icon: Coffee,
     number: "03",
-    title: "SIP & THRIVE",
-    description:
-      "Enjoy immediately. 30g protein, 85+ superfoods, and complete nutrition in every sip.",
+    title: "ENJOY",
   },
+];
+
+const uses = [
+  { icon: Sun, label: "As a quick breakfast" },
+  { icon: Clock, label: "Between meals" },
+  { icon: PersonSimpleRun, label: "After exercise" },
+  { icon: Lightning, label: "Whenever you need balanced nutrition fast" },
 ];
 
 export function HowItWorks() {
@@ -40,15 +41,15 @@ export function HowItWorks() {
           className="text-center mb-16"
         >
           <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase mb-4">
-            JUST ADD WATER
+            HOW IT WORKS
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-white">
-            THREE STEPS TO <span className="text-[#006D77]">FUEL</span>
+            One simple <span className="text-[#006D77]">habit.</span>
           </h2>
         </motion.div>
 
         {/* Steps grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
@@ -69,17 +70,41 @@ export function HowItWorks() {
               </p>
 
               {/* Title */}
-              <h3 className="text-sm font-black tracking-wider text-white mb-3">
+              <h3 className="text-sm font-black tracking-wider text-white">
                 {step.title}
               </h3>
-
-              {/* Description */}
-              <p className="text-sm text-white/50 leading-relaxed max-w-xs mx-auto">
-                {step.description}
-              </p>
             </motion.div>
           ))}
         </div>
+
+        {/* Horizon divider */}
+        <div className="horizon-line my-12 max-w-[200px] mx-auto" />
+
+        {/* Use occasions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center"
+        >
+          <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase mb-8">
+            PERFECT FOR
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            {uses.map((use, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 px-5 py-3 bg-white/5 rounded-full border border-white/10"
+              >
+                <use.icon size={18} weight="bold" className="text-[#006D77]" />
+                <span className="text-sm text-white/70 font-medium">
+                  {use.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

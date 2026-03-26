@@ -1,21 +1,23 @@
 import { Hero } from "@/components/home/Hero";
 import { BenefitsStrip } from "@/components/home/BenefitsStrip";
-import { FeaturedFlavours } from "@/components/home/FeaturedFlavours";
+import { ProblemSection } from "@/components/home/ProblemSection";
+import { SolutionSection } from "@/components/home/SolutionSection";
 import { HowItWorks } from "@/components/home/HowItWorks";
-import { BundlePromo } from "@/components/home/BundlePromo";
-import { LifestyleBanner } from "@/components/home/LifestyleBanner";
+import { FeaturedFlavours } from "@/components/home/FeaturedFlavours";
 import { SocialProof } from "@/components/home/SocialProof";
+import { FinalCTA } from "@/components/home/FinalCTA";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
       <BenefitsStrip />
-      <FeaturedFlavours />
+      <ProblemSection />
+      <SolutionSection />
       <HowItWorks />
-      <BundlePromo />
-      <LifestyleBanner />
+      <FeaturedFlavours />
       <SocialProof />
+      <FinalCTA />
     </>
   );
 }

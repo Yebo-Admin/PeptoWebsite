@@ -8,19 +8,19 @@ export const faqItems: FAQItem[] = [
   {
     question: "What is PeptoMeal?",
     answer:
-      "PeptoMeal is a premium all-in-one nutritional shake designed to give you balanced daily nutrition in under 60 seconds. Each serving contains 15.3g protein, 4.3g fibre, synbiotics, omega-3, and 24 vitamins and minerals — all in just 110 calories.",
+      "PeptoMeal is a complete nutritional shake designed to support energy, recovery and daily wellbeing. Each serving contains 15.3g protein, 4.3g fibre, a synbiotic formula, omega-3 healthy fats, and 24 essential vitamins and minerals — all in just 110 calories.",
     category: "product",
   },
   {
     question: "How do I prepare a PeptoMeal shake?",
     answer:
-      "Add one sachet (33g) to 250–300ml of cold water, shake vigorously for 15 seconds, and enjoy. You can also blend it with milk, add it to smoothies, or use it in recipes like overnight oats and protein puddings.",
+      "Add one sachet (33g) to 250-300ml of cold water, shake vigorously for 15-20 seconds, and enjoy. You can also blend it with milk, add it to smoothies, or use it in recipes like overnight oats and protein bowls.",
     category: "usage",
   },
   {
     question: "Can PeptoMeal replace a full meal?",
     answer:
-      "PeptoMeal is formulated as a balanced nutritional shake that supports your daily nutrition. It works well as a breakfast replacement, between-meal support, or post-workout recovery shake. We recommend using it as part of a balanced diet alongside whole foods.",
+      "PeptoMeal is designed as a complete nutritional shake that supports your daily nutrition. It works well as a quick breakfast, between meals, after exercise, or whenever you need balanced nutrition fast. We recommend using it as part of a balanced diet alongside whole foods.",
     category: "nutrition",
   },
   {
@@ -32,25 +32,31 @@ export const faqItems: FAQItem[] = [
   {
     question: "What protein source does PeptoMeal use?",
     answer:
-      "PeptoMeal uses a whey and skim-milk protein base to deliver 15.3g of high-quality protein per serving. This provides a complete amino acid profile for muscle support and recovery.",
+      "PeptoMeal uses a whey and skim-milk protein base to deliver 15.3g of high-quality protein per serving. This provides a complete amino acid profile to support muscle maintenance, recovery and satiety.",
     category: "nutrition",
   },
   {
     question: "How many calories are in one serving?",
     answer:
-      "Each 33g serving contains approximately 110 calories, making it a convenient low-calorie option that still delivers substantial nutrition.",
+      "Each 33g serving contains only 110 calories, making it a convenient low-calorie option that still delivers substantial, balanced nutrition.",
     category: "nutrition",
   },
   {
     question: "What are synbiotics?",
     answer:
-      "Synbiotics are a combination of prebiotics and probiotics that work together to support gut health. PeptoMeal includes a synbiotic formula to help maintain a healthy digestive system.",
+      "Synbiotics are a combination of prebiotics and probiotics that work together to support gut and immune health. PeptoMeal includes a synbiotic formula to help maintain a healthy digestive system.",
     category: "nutrition",
+  },
+  {
+    question: "How many flavours are available?",
+    answer:
+      "PeptoMeal is available in 10 delicious flavours: Chocolate Caramel, Caramel Latte, Cinnamon Pancake, Strawberry, Vanilla, Salted Chocolate, Cotton Candy, Cream Soda, Jelly Tots, and Turkish Delight. Not sure where to start? Try a Discovery Box.",
+    category: "product",
   },
   {
     question: "How much does shipping cost?",
     answer:
-      "Shipping rates vary by location. Orders are processed within 1-2 business days, with delivery typically taking 2-5 working days nationwide across South Africa.",
+      "Shipping costs are calculated at checkout. Orders are processed within 1-2 business days, with delivery typically arriving within 2-5 working days nationwide across South Africa.",
     category: "shipping",
   },
   {
@@ -62,7 +68,13 @@ export const faqItems: FAQItem[] = [
   {
     question: "Which flavour should I try first?",
     answer:
-      "Our Chocolate Caramel is the crowd favourite and a great starting point. If you want to try everything, grab the Discovery Box — it includes one sachet of every flavour so you can find your match.",
+      "Our Chocolate Caramel is the customer favourite and a great starting point. If you want to explore, grab a Discovery Box — it includes a selection of our most popular flavours so you can find your match.",
     category: "product",
+  },
+  {
+    question: "When should I use PeptoMeal?",
+    answer:
+      "PeptoMeal is designed to fit into your routine whenever you need it: as a quick breakfast, between meals, after exercise, or whenever you need balanced nutrition fast. There is no fixed time — use it when it works best for you.",
+    category: "usage",
   },
 ];

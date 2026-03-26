@@ -92,13 +92,13 @@ export default function PodcastPage() {
                 </span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white leading-tight">
-                HONEST CONVERSATIONS
+                CONVERSATIONS ABOUT HEALTH,
                 <br />
-                ABOUT REAL{" "}
-                <span className="text-[#006D77]">NUTRITION</span>
+                NUTRITION AND{" "}
+                <span className="text-[#006D77]">WELLBEING</span>
               </h1>
               <p className="mt-6 text-base text-white/50 leading-relaxed max-w-lg">
-                Weekly episodes with nutritionists, athletes, and everyday people building healthier routines. No fads, no gatekeeping — just practical insights.
+                The PeptoMeal Podcast explores topics around nutrition, lifestyle and overall wellbeing. Through conversations with experts, professionals and inspiring individuals, the podcast aims to share practical insights that help people better understand their health and daily habits. Tune in for discussions that inform, inspire and support healthier living.
               </p>
 
               <div className="flex flex-wrap gap-3 mt-8">
