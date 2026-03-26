@@ -8,25 +8,25 @@ import { CartDrawer } from "@/components/layout/CartDrawer";
 
 export const metadata: Metadata = {
   title: {
-    default: "PeptoMeals — Biological Fuel. 30g Protein. 85+ Superfoods.",
-    template: "%s | PeptoMeals",
+    default: "PeptoMeal — Better Nutrition. One Shake A Day.",
+    template: "%s | PeptoMeal",
   },
   description:
-    "Premium plant-based nutritional shake with 30g protein, 85+ superfoods, prebiotics & probiotics. Whole body nutrition in every scoop. Born in South Africa.",
+    "PeptoMeal is a complete nutritional shake designed to support energy, recovery and daily wellbeing. 15.3g protein, synbiotics, omega-3, and 24 vitamins & minerals in every serving.",
   keywords: [
-    "PeptoMeals",
-    "VitaShake",
+    "PeptoMeal",
     "nutritional shake",
     "meal replacement",
-    "plant protein",
+    "protein shake",
     "South Africa",
-    "superfoods",
+    "complete nutrition",
+    "synbiotics",
     "gut health",
   ],
   openGraph: {
     type: "website",
     locale: "en_ZA",
-    siteName: "PeptoMeals",
+    siteName: "PeptoMeal",
   },
 };
 
@@ -37,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="antialiased">
-      <body className="min-h-[100dvh] flex flex-col" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <body className="min-h-[100dvh] flex flex-col" style={{ fontFamily: "'Montserrat', system-ui, sans-serif" }}>
         <Providers>
           <AnnouncementBar />
           <Navbar />

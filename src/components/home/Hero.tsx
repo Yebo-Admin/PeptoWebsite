@@ -5,10 +5,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-const HERO_IMAGE =
-  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/4724678c7_generated_e7547806.png";
-const LIFESTYLE_IMAGE =
-  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/fcdce38ca_generated_d1045059.png";
+const HERO_IMAGE = "/images/products/chocolate-caramel.png";
+const LIFESTYLE_IMAGE = "/images/lifestyle/gemini_generated_image_vesj6bvesj6bvesj.png";
 
 export function Hero() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });

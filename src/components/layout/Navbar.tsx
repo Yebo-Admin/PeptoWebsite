@@ -17,26 +17,10 @@ const NAV_LINKS = [
 ];
 
 const SHOP_PRODUCTS = [
-  {
-    flavor: "Chocolate Treat",
-    image:
-      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/bf267524c_generated_1c1e7647.png",
-  },
-  {
-    flavor: "Vanilla Swirl",
-    image:
-      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/b27df8a36_generated_14b89d36.png",
-  },
-  {
-    flavor: "Caramel Latte",
-    image:
-      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/4d52fd9a1_generated_96b4a5cd.png",
-  },
-  {
-    flavor: "Berry Blast",
-    image:
-      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/696ee3ef5_generated_b73cdcb6.png",
-  },
+  { flavor: "Chocolate Caramel", image: "/images/products/chocolate-caramel.png" },
+  { flavor: "Caramel Latte", image: "/images/products/caramel-latte.png" },
+  { flavor: "Strawberry", image: "/images/products/strawberry.png" },
+  { flavor: "Vanilla", image: "/images/products/vanilla.png" },
 ];
 
 export function Navbar() {

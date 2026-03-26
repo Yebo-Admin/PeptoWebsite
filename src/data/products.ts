@@ -48,19 +48,19 @@ const BASE_BENEFITS = [
   "4.3g fibre for digestion and fullness",
 ];
 
-// Using the Base44 product images where available, placeholders for new flavours
+// Real product images from brand assets
 const PRODUCT_IMAGES: Record<string, string> = {
-  "Chocolate Caramel": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/bf267524c_generated_1c1e7647.png",
-  "Caramel Latte": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/4d52fd9a1_generated_96b4a5cd.png",
-  "Vanilla": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/b27df8a36_generated_14b89d36.png",
-  "Strawberry": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/696ee3ef5_generated_b73cdcb6.png",
-  "Cinnamon Pancake": "https://picsum.photos/seed/pepto-cinnamon/600/800",
-  "Salted Chocolate": "https://picsum.photos/seed/pepto-saltchoc/600/800",
-  "Cotton Candy": "https://picsum.photos/seed/pepto-cotton/600/800",
-  "Cream Soda": "https://picsum.photos/seed/pepto-creamsoda/600/800",
-  "Jelly Tots": "https://picsum.photos/seed/pepto-jellytots/600/800",
-  "Turkish Delight": "https://picsum.photos/seed/pepto-turkish/600/800",
-  "Discovery Box": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/a09f77e36_generated_ab506fa8.png",
+  "Chocolate Caramel": "/images/products/chocolate-caramel.png",
+  "Caramel Latte": "/images/products/caramel-latte.png",
+  "Vanilla": "/images/products/vanilla.png",
+  "Strawberry": "/images/products/strawberry.png",
+  "Cinnamon Pancake": "/images/products/cinnamon-pancake.png",
+  "Salted Chocolate": "/images/products/salted-chocolate.png",
+  "Cotton Candy": "/images/products/cotton-candy.png",
+  "Cream Soda": "/images/products/cream-soda.png",
+  "Jelly Tots": "/images/products/jelly-tots.png",
+  "Turkish Delight": "/images/products/turkish-delight.png",
+  "Discovery Box": "/images/products/chocolate-caramel.png",
 };
 
 export const products: Product[] = [

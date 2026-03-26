@@ -19,10 +19,8 @@ import {
   GrainsSlash,
 } from "@phosphor-icons/react";
 
-const SA_IMAGE =
-  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/fcdce38ca_generated_d1045059.png";
-const INGREDIENTS_IMAGE =
-  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/a09f77e36_generated_ab506fa8.png";
+const SA_IMAGE = "/images/lifestyle/gemini_generated_image_7lkofy7lkofy7lko.png";
+const INGREDIENTS_IMAGE = "/images/lifestyle/gemini_generated_image_o82gx4o82gx4o82g.png";
 
 const philosophyItems = [
   {
