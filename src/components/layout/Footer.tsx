@@ -39,13 +39,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           {/* Brand column */}
           <div className="md:col-span-4">
-            <Link href="/" className="inline-flex items-baseline gap-0.5">
-              <span className="text-2xl sm:text-3xl font-black tracking-tighter text-white">
-                PEPTO
-              </span>
-              <span className="text-2xl sm:text-3xl font-black tracking-tighter text-[#006D77]">
-                MEALS
-              </span>
+            <Link href="/" className="inline-block">
+              <img
+                src="/images/logos/peptomeal-logo-white.svg"
+                alt="PeptoMeal"
+                className="h-9 sm:h-11 w-auto"
+              />
             </Link>
             <p className="mt-4 text-sm text-zinc-400 leading-relaxed max-w-xs">
               Premium all-in-one nutritional shakes for busy, health-conscious

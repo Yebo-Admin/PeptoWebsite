@@ -62,21 +62,12 @@ export function Navbar() {
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between px-4 md:px-8 h-16 md:h-18">
         {/* Logo */}
-        <Link href="/" className="flex items-baseline gap-0.5 group">
-          <span
-            className={`text-2xl sm:text-3xl font-black tracking-tighter transition-colors ${
-              isTransparent ? "text-white" : "text-[#1A1A1A]"
-            }`}
-          >
-            PEPTO
-          </span>
-          <span
-            className={`text-2xl sm:text-3xl font-black tracking-tighter transition-colors ${
-              isTransparent ? "text-[#FFB703]" : "text-[#006D77]"
-            }`}
-          >
-            MEALS
-          </span>
+        <Link href="/" className="block shrink-0">
+          <img
+            src={isTransparent ? "/images/logos/peptomeal-logo-white.svg" : "/images/logos/peptomeal-logo.svg"}
+            alt="PeptoMeal"
+            className="h-8 sm:h-10 w-auto transition-opacity"
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -228,14 +219,13 @@ export function Navbar() {
               <Link
                 href="/"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-baseline gap-0.5"
+                className="block"
               >
-                <span className="text-2xl sm:text-3xl font-black tracking-tighter text-[#1A1A1A]">
-                  PEPTO
-                </span>
-                <span className="text-2xl sm:text-3xl font-black tracking-tighter text-[#006D77]">
-                  MEALS
-                </span>
+                <img
+                  src="/images/logos/peptomeal-logo.svg"
+                  alt="PeptoMeal"
+                  className="h-8 sm:h-10 w-auto"
+                />
               </Link>
               <button
                 onClick={() => setMobileOpen(false)}
