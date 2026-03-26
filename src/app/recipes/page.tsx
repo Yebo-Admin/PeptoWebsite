@@ -4,17 +4,38 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Timer, Funnel } from "@phosphor-icons/react";
+import { Timer, Drop, BowlFood, CookingPot } from "@phosphor-icons/react";
 import { recipes } from "@/data/recipes";
 
 type MealFilter = "all" | "breakfast" | "smoothie" | "dessert" | "snack";
 
 const filters: { value: MealFilter; label: string }[] = [
-  { value: "all", label: "All Recipes" },
-  { value: "breakfast", label: "Breakfast" },
-  { value: "smoothie", label: "Smoothies" },
-  { value: "dessert", label: "Desserts" },
-  { value: "snack", label: "Snacks" },
+  { value: "all", label: "ALL" },
+  { value: "breakfast", label: "BREAKFAST" },
+  { value: "smoothie", label: "SMOOTHIES" },
+  { value: "dessert", label: "DESSERTS" },
+  { value: "snack", label: "SNACKS" },
+];
+
+const steps = [
+  {
+    icon: Drop,
+    step: "01",
+    title: "CHOOSE YOUR FLAVOUR",
+    description: "Pick from our range of delicious PeptoMeal flavours as your base ingredient.",
+  },
+  {
+    icon: BowlFood,
+    step: "02",
+    title: "BLEND OR MIX",
+    description: "Follow the recipe. Most take under 5 minutes — some just 60 seconds.",
+  },
+  {
+    icon: CookingPot,
+    step: "03",
+    title: "ENJOY & FUEL UP",
+    description: "Dig into a protein-packed meal that tastes incredible and fuels your day.",
+  },
 ];
 
 export default function RecipesPage() {
@@ -26,39 +47,97 @@ export default function RecipesPage() {
       : recipes.filter((r) => r.mealType === activeFilter);
 
   return (
-    <>
-      <section className="pt-16 pb-10 md:pt-20 md:pb-14 bg-zinc-50">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+    <div className="bg-[#F1F1E6]">
+      {/* Dark Header */}
+      <section className="relative bg-[#1A1A1A] pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
+        <div className="relative max-w-[1400px] mx-auto px-4 md:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
           >
-            <span className="text-xs font-semibold text-teal-600 uppercase tracking-widest">
-              Beyond The Shake
-            </span>
-            <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900">
-              PeptoMeal Recipes
+            <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase mb-4">
+              BEYOND THE SHAKE
+            </p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white">
+              PEPTOMEAL{" "}
+              <span className="text-[#006D77]">RECIPES</span>
             </h1>
-            <p className="mt-3 text-lg text-zinc-500 max-w-lg">
+            <p className="mt-4 text-base text-white/50 max-w-md mx-auto">
               Bowls, smoothies, popsicles, puddings — discover new ways to enjoy your daily nutrition.
             </p>
           </motion.div>
         </div>
+        <div className="horizon-line mt-16" />
       </section>
 
-      <section className="py-10 md:py-16 bg-white">
+      {/* How-To Section */}
+      <section className="py-16 md:py-20">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-          <div className="flex items-center gap-2 mb-10 overflow-x-auto pb-2">
-            <Funnel size={18} className="text-zinc-400 shrink-0" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p className="text-xs font-bold tracking-[0.3em] text-[#006D77] uppercase mb-3">
+              HOW IT WORKS
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tighter text-[#1A1A1A]">
+              THREE SIMPLE <span className="text-[#006D77]">STEPS</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {steps.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.step}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="bg-white rounded-2xl p-6 md:p-8 text-center"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-[#006D77]/10 flex items-center justify-center mx-auto mb-4">
+                    <Icon size={28} weight="duotone" className="text-[#006D77]" />
+                  </div>
+                  <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] mb-2">
+                    STEP {item.step}
+                  </p>
+                  <h3 className="text-sm font-black tracking-wider text-[#1A1A1A] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                    {item.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Horizon line */}
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+        <div className="horizon-line" />
+      </div>
+
+      {/* Recipe Cards Section */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+          {/* Filter tabs */}
+          <div className="flex items-center justify-center gap-2 mb-12">
             {filters.map((filter) => (
               <button
                 key={filter.value}
                 onClick={() => setActiveFilter(filter.value)}
-                className={`px-4 py-2 text-sm font-medium rounded-full whitespace-nowrap transition-all ${
+                className={`px-5 py-2 text-[11px] font-bold tracking-wider rounded-full whitespace-nowrap transition-all ${
                   activeFilter === filter.value
-                    ? "bg-teal-600 text-white"
-                    : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+                    ? "bg-[#006D77] text-white"
+                    : "bg-white text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 {filter.label}
@@ -75,69 +154,85 @@ export default function RecipesPage() {
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {filtered.map((recipe) => (
-                <Link
+              {filtered.map((recipe, index) => (
+                <motion.div
                   key={recipe.id}
-                  href={`/recipes/${recipe.slug}`}
-                  className="group bg-white rounded-[1.5rem] overflow-hidden border border-zinc-100 hover:border-zinc-200 transition-all hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.06)]"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={recipe.image}
-                      alt={recipe.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full">
-                      <Timer size={14} weight="bold" className="text-teal-600" />
-                      <span className="text-xs font-semibold text-zinc-700">
-                        {recipe.prepTime}
+                  <Link
+                    href={`/recipes/${recipe.slug}`}
+                    className="group block bg-white rounded-2xl overflow-hidden border border-transparent hover:border-[#006D77]/10 transition-all hover:shadow-xl"
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[#F1F1E6]">
+                      <Image
+                        src={recipe.image}
+                        alt={recipe.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full">
+                        <Timer size={14} weight="bold" className="text-[#006D77]" />
+                        <span className="text-xs font-bold text-[#1A1A1A]">
+                          {recipe.prepTime}
+                        </span>
+                      </div>
+                      <div className="absolute top-3 right-3 px-3 py-1 bg-[#1A1A1A]/70 backdrop-blur-sm text-white text-[11px] font-bold rounded-full capitalize tracking-wider">
+                        {recipe.mealType}
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <span className="text-xs font-bold tracking-[0.2em] text-[#006D77] uppercase">
+                        {recipe.flavour}
                       </span>
+                      <h3 className="mt-1 font-black text-[#1A1A1A] tracking-tight text-lg group-hover:text-[#006D77] transition-colors">
+                        {recipe.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-gray-500 line-clamp-2">
+                        {recipe.description}
+                      </p>
                     </div>
-                    <div className="absolute top-3 right-3 px-3 py-1 bg-zinc-900/70 backdrop-blur-sm text-white text-[11px] font-semibold rounded-full capitalize">
-                      {recipe.mealType}
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <span className="text-xs font-medium text-teal-600">
-                      {recipe.flavour}
-                    </span>
-                    <h3 className="mt-1 font-bold text-zinc-900 tracking-tight text-lg group-hover:text-teal-700 transition-colors">
-                      {recipe.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-zinc-500 line-clamp-2">
-                      {recipe.description}
-                    </p>
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           </AnimatePresence>
 
-          {/* Email capture */}
-          <div className="mt-16 p-8 md:p-12 bg-teal-50 rounded-[2rem] text-center">
-            <h3 className="text-2xl font-bold tracking-tighter text-zinc-900">
-              Get weekly recipe drops
+          {/* Newsletter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-16 p-8 md:p-12 bg-[#006D77] rounded-3xl text-center"
+          >
+            <h3 className="text-2xl font-black tracking-tighter text-white">
+              GET WEEKLY RECIPE DROPS
             </h3>
-            <p className="mt-2 text-base text-zinc-500 max-w-md mx-auto">
-              New PeptoMeal recipes delivered to your inbox every week. Simple, delicious, protein-packed.
+            <p className="mt-2 text-base text-white/60 max-w-md mx-auto">
+              New PeptoMeal recipes delivered to your inbox every week.
             </p>
-            <form className="flex gap-3 max-w-md mx-auto mt-6" onSubmit={(e) => e.preventDefault()}>
+            <form
+              className="flex gap-3 max-w-md mx-auto mt-6"
+              onSubmit={(e) => e.preventDefault()}
+            >
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 px-5 py-3 bg-white border border-zinc-200 rounded-full text-sm placeholder:text-zinc-400 focus:outline-none focus:border-teal-500 transition-colors"
+                className="flex-1 px-5 py-3 bg-white/10 border border-white/20 rounded-full text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-[#FFB703] transition-colors"
               />
               <button
                 type="submit"
-                className="px-6 py-3 bg-teal-600 text-white text-sm font-semibold rounded-full hover:bg-teal-700 transition-colors"
+                className="px-6 py-3 bg-[#FFB703] hover:bg-[#FFC733] text-[#1A1A1A] text-sm font-bold tracking-wider rounded-full transition-colors"
               >
-                Subscribe
+                SUBSCRIBE
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

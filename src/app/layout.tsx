@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
@@ -7,36 +6,27 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: {
-    default: "PeptoMeal — Better Nutrition. One Shake A Day.",
-    template: "%s | PeptoMeal",
+    default: "PeptoMeals — Biological Fuel. 30g Protein. 85+ Superfoods.",
+    template: "%s | PeptoMeals",
   },
   description:
-    "Premium all-in-one nutritional shake with 15.3g protein, synbiotics, omega-3, and 24 vitamins & minerals. Delicious flavours. Complete nutrition. Anytime, anywhere.",
+    "Premium plant-based nutritional shake with 30g protein, 85+ superfoods, prebiotics & probiotics. Whole body nutrition in every scoop. Born in South Africa.",
   keywords: [
-    "PeptoMeal",
+    "PeptoMeals",
+    "VitaShake",
     "nutritional shake",
     "meal replacement",
-    "protein shake",
+    "plant protein",
     "South Africa",
-    "complete nutrition",
-    "synbiotics",
+    "superfoods",
+    "gut health",
   ],
   openGraph: {
     type: "website",
     locale: "en_ZA",
-    siteName: "PeptoMeal",
+    siteName: "PeptoMeals",
   },
 };
 
@@ -46,11 +36,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
-      <body className="min-h-[100dvh] flex flex-col">
+    <html lang="en" className="antialiased">
+      <body className="min-h-[100dvh] flex flex-col" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
         <Providers>
           <AnnouncementBar />
           <Navbar />

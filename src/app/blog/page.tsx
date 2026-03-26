@@ -1,22 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarBlank, Timer } from "@phosphor-icons/react";
 
 const categories = [
-  { slug: "nutrition", label: "Nutrition" },
-  { slug: "recipes", label: "Recipes" },
-  { slug: "gut-health", label: "Gut Health" },
-  { slug: "routines", label: "Healthy Routines" },
+  { slug: "all", label: "ALL" },
+  { slug: "nutrition", label: "NUTRITION" },
+  { slug: "recipes", label: "RECIPES" },
+  { slug: "gut-health", label: "GUT HEALTH" },
+  { slug: "routines", label: "ROUTINES" },
 ];
 
 const articles = [
   {
     id: "blog-1",
     title: "Why 110 Calories Can Be More Nutritious Than a 600 Calorie Lunch",
-    excerpt: "Calorie density and nutrient density are two different things. Here's why your lunch might be filling you up without actually fuelling you.",
+    excerpt:
+      "Calorie density and nutrient density are two different things. Here's why your lunch might be filling you up without actually fuelling you.",
     image: "https://picsum.photos/seed/blog-cal/800/500",
     category: "Nutrition",
     date: "Mar 24, 2026",
@@ -27,7 +30,8 @@ const articles = [
   {
     id: "blog-2",
     title: "Synbiotics 101: The Gut Health Combination Most People Miss",
-    excerpt: "Probiotics get all the press. But without prebiotics, they're fighting an uphill battle. Here's how synbiotics change the game.",
+    excerpt:
+      "Probiotics get all the press. But without prebiotics, they're fighting an uphill battle. Here's how synbiotics change the game.",
     image: "https://picsum.photos/seed/blog-gut/800/500",
     category: "Gut Health",
     date: "Mar 20, 2026",
@@ -37,7 +41,8 @@ const articles = [
   {
     id: "blog-3",
     title: "5 Ways to Use PeptoMeal Beyond a Basic Shake",
-    excerpt: "Overnight oats, protein pudding, smoothie bowls, popsicles, and pancakes. Your sachet can do more than you think.",
+    excerpt:
+      "Overnight oats, protein pudding, smoothie bowls, popsicles, and pancakes. Your sachet can do more than you think.",
     image: "https://picsum.photos/seed/blog-recipes/800/500",
     category: "Recipes",
     date: "Mar 17, 2026",
@@ -47,9 +52,10 @@ const articles = [
   {
     id: "blog-4",
     title: "The Morning Routine That Doesn't Require Willpower",
-    excerpt: "Habit stacking, environmental design, and the 60-second nutrition rule. Build consistency without burning out.",
+    excerpt:
+      "Habit stacking, environmental design, and the 60-second nutrition rule. Build consistency without burning out.",
     image: "https://picsum.photos/seed/blog-routine/800/500",
-    category: "Healthy Routines",
+    category: "Routines",
     date: "Mar 13, 2026",
     readTime: "7 min read",
     slug: "morning-routine-no-willpower",
@@ -57,7 +63,8 @@ const articles = [
   {
     id: "blog-5",
     title: "Protein for People Who Don't Lift Weights",
-    excerpt: "You don't need to be a gym-goer to benefit from adequate protein. Here's why it matters for everyone — and how much you actually need.",
+    excerpt:
+      "You don't need to be a gym-goer to benefit from adequate protein. Here's why it matters for everyone — and how much you actually need.",
     image: "https://picsum.photos/seed/blog-protein/800/500",
     category: "Nutrition",
     date: "Mar 10, 2026",
@@ -67,7 +74,8 @@ const articles = [
   {
     id: "blog-6",
     title: "Omega-3 and Why Your Brain Wants You to Pay Attention",
-    excerpt: "The fatty acid your cognitive function depends on — and why most South Africans aren't getting enough of it.",
+    excerpt:
+      "The fatty acid your cognitive function depends on — and why most South Africans aren't getting enough of it.",
     image: "https://picsum.photos/seed/blog-omega/800/500",
     category: "Nutrition",
     date: "Mar 6, 2026",
@@ -76,51 +84,64 @@ const articles = [
   },
 ];
 
-const featured = articles.find((a) => a.featured);
-const rest = articles.filter((a) => !a.featured);
-
 export default function BlogPage() {
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  const featured = articles.find((a) => a.featured);
+  const filteredArticles =
+    activeCategory === "all"
+      ? articles.filter((a) => !a.featured)
+      : articles.filter(
+          (a) => a.category.toLowerCase().replace(" ", "-") === activeCategory && !a.featured
+        );
+
   return (
-    <>
-      <section className="pt-16 pb-10 md:pt-20 md:pb-14 bg-zinc-50">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+    <div className="bg-[#F1F1E6]">
+      {/* Dark Header */}
+      <section className="relative bg-[#1A1A1A] pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
+        <div className="relative max-w-[1400px] mx-auto px-4 md:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
           >
-            <span className="text-xs font-semibold text-teal-600 uppercase tracking-widest">
-              The Pepto Journal
-            </span>
-            <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900">
-              Nutrition, Simplified.
+            <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase mb-4">
+              THE PEPTO JOURNAL
+            </p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white">
+              NUTRITION,{" "}
+              <span className="text-[#006D77]">SIMPLIFIED</span>
             </h1>
-            <p className="mt-3 text-lg text-zinc-500 max-w-lg">
+            <p className="mt-4 text-base text-white/50 max-w-md mx-auto">
               Practical insights on nutrition, gut health, and building routines that last.
             </p>
           </motion.div>
-
-          {/* Categories */}
-          <div className="flex gap-2 mt-8 overflow-x-auto pb-2">
-            <span className="px-4 py-2 bg-teal-600 text-white text-sm font-medium rounded-full">
-              All
-            </span>
-            {categories.map((cat) => (
-              <span
-                key={cat.slug}
-                className="px-4 py-2 bg-zinc-100 text-zinc-600 text-sm font-medium rounded-full hover:bg-zinc-200 transition-colors cursor-pointer whitespace-nowrap"
-              >
-                {cat.label}
-              </span>
-            ))}
-          </div>
         </div>
+        <div className="horizon-line mt-16" />
       </section>
 
-      <section className="py-10 md:py-16 bg-white">
+      {/* Content */}
+      <section className="py-12 md:py-20">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+          {/* Category filters */}
+          <div className="flex gap-2 mb-12 overflow-x-auto pb-2 justify-center">
+            {categories.map((cat) => (
+              <button
+                key={cat.slug}
+                onClick={() => setActiveCategory(cat.slug)}
+                className={`px-5 py-2 text-[11px] font-bold tracking-wider rounded-full whitespace-nowrap transition-all ${
+                  activeCategory === cat.slug
+                    ? "bg-[#006D77] text-white"
+                    : "bg-white text-gray-500 hover:bg-gray-100"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
           {/* Featured article */}
-          {featured && (
+          {featured && activeCategory === "all" && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -129,7 +150,7 @@ export default function BlogPage() {
             >
               <Link
                 href={`/blog/${featured.slug}`}
-                className="group grid grid-cols-1 lg:grid-cols-2 gap-8 bg-zinc-50 rounded-[2rem] overflow-hidden border border-zinc-100 hover:border-zinc-200 transition-all"
+                className="group grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white rounded-3xl overflow-hidden border border-transparent hover:border-[#006D77]/10 transition-all hover:shadow-xl"
               >
                 <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden">
                   <Image
@@ -140,16 +161,16 @@ export default function BlogPage() {
                   />
                 </div>
                 <div className="p-6 md:p-10 flex flex-col justify-center">
-                  <span className="text-xs font-semibold text-teal-600 uppercase tracking-widest">
+                  <span className="text-xs font-bold tracking-[0.3em] text-[#006D77] uppercase">
                     {featured.category}
                   </span>
-                  <h2 className="mt-3 text-2xl md:text-3xl font-bold tracking-tighter text-zinc-900 group-hover:text-teal-700 transition-colors leading-tight">
+                  <h2 className="mt-3 text-2xl md:text-3xl font-black tracking-tighter text-[#1A1A1A] group-hover:text-[#006D77] transition-colors leading-tight">
                     {featured.title}
                   </h2>
-                  <p className="mt-4 text-base text-zinc-500 leading-relaxed">
+                  <p className="mt-4 text-base text-gray-500 leading-relaxed">
                     {featured.excerpt}
                   </p>
-                  <div className="flex items-center gap-3 mt-6 text-xs text-zinc-400">
+                  <div className="flex items-center gap-3 mt-6 text-xs text-gray-400">
                     <span className="inline-flex items-center gap-1">
                       <CalendarBlank size={12} />
                       {featured.date}
@@ -166,49 +187,58 @@ export default function BlogPage() {
           )}
 
           {/* Article grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {rest.map((article, index) => (
-              <motion.div
-                key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.06 }}
-              >
-                <Link
-                  href={`/blog/${article.slug}`}
-                  className="group block bg-white rounded-[1.5rem] overflow-hidden border border-zinc-100 hover:border-zinc-200 transition-all hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.06)]"
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {filteredArticles.map((article, index) => (
+                <motion.div
+                  key={article.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.06 }}
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={article.image}
-                      alt={article.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <span className="text-xs font-medium text-teal-600">
-                      {article.category}
-                    </span>
-                    <h3 className="mt-2 font-bold text-zinc-900 tracking-tight group-hover:text-teal-700 transition-colors leading-snug">
-                      {article.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-zinc-500 line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                    <div className="flex items-center gap-3 mt-4 text-xs text-zinc-400">
-                      <span>{article.date}</span>
-                      <span aria-hidden="true">&middot;</span>
-                      <span>{article.readTime}</span>
+                  <Link
+                    href={`/blog/${article.slug}`}
+                    className="group block bg-white rounded-2xl overflow-hidden border border-transparent hover:border-[#006D77]/10 transition-all hover:shadow-xl"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden bg-[#F1F1E6]">
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                    <div className="p-5">
+                      <span className="text-xs font-bold tracking-[0.2em] text-[#006D77] uppercase">
+                        {article.category}
+                      </span>
+                      <h3 className="mt-2 font-black text-[#1A1A1A] tracking-tight group-hover:text-[#006D77] transition-colors leading-snug">
+                        {article.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-gray-500 line-clamp-2">
+                        {article.excerpt}
+                      </p>
+                      <div className="flex items-center gap-3 mt-4 text-xs text-gray-400">
+                        <span>{article.date}</span>
+                        <span aria-hidden="true">&middot;</span>
+                        <span>{article.readTime}</span>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
-    </>
+    </div>
   );
 }

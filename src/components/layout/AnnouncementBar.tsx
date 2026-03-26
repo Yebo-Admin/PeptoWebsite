@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X, Truck } from "@phosphor-icons/react";
+import { X } from "@phosphor-icons/react";
 
 export function AnnouncementBar() {
   const [visible, setVisible] = useState(true);
@@ -9,11 +9,12 @@ export function AnnouncementBar() {
   if (!visible) return null;
 
   return (
-    <div className="relative bg-teal-700 text-white text-sm">
-      <div className="max-w-[1400px] mx-auto flex items-center justify-center gap-2 px-4 py-2.5">
-        <Truck size={16} weight="bold" className="shrink-0" />
-        <p className="font-medium tracking-wide">
-          Free delivery on orders over R300 — Nationwide shipping in 2-5 working days
+    <div className="relative bg-[#006D77] text-white text-xs">
+      <div className="max-w-[1400px] mx-auto flex items-center justify-center gap-2 px-8 py-2.5">
+        <p className="font-semibold tracking-widest uppercase text-center">
+          FREE SHIPPING ON ORDERS OVER R500{" "}
+          <span className="text-[#FFB703]">&mdash;</span>{" "}
+          30-DAY LOVE-IT GUARANTEE
         </p>
       </div>
       <button

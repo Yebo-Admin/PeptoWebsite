@@ -6,30 +6,21 @@ import {
   FacebookLogo,
   TiktokLogo,
   YoutubeLogo,
-  EnvelopeSimple,
 } from "@phosphor-icons/react";
 
-const footerLinks = {
-  shop: [
-    { href: "/shop", label: "All Flavours" },
-    { href: "/shop?filter=bestsellers", label: "Bestsellers" },
-    { href: "/products/discovery-box", label: "Discovery Box" },
-  ],
-  learn: [
-    { href: "/about", label: "Our Science" },
-    { href: "/recipes", label: "Recipes" },
-    { href: "/blog", label: "The Pepto Journal" },
-    { href: "/podcast", label: "Podcast" },
-    { href: "/faq", label: "FAQ" },
-  ],
-  company: [
-    { href: "/contact", label: "Contact Us" },
-    { href: "/about", label: "About PeptoMeal" },
-    { href: "/shipping", label: "Shipping & Returns" },
-    { href: "/privacy", label: "Privacy Policy" },
-    { href: "/terms", label: "Terms & Conditions" },
-  ],
-};
+const shopLinks = [
+  { href: "/shop", label: "All Flavours" },
+  { href: "/shop?filter=bestsellers", label: "Bestsellers" },
+  { href: "/products/discovery-box", label: "Discovery Box" },
+  { href: "/shop?filter=bundles", label: "Bundles" },
+];
+
+const learnLinks = [
+  { href: "/about", label: "Our Story" },
+  { href: "/recipes", label: "Recipes" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/blog", label: "The Journal" },
+];
 
 const socialLinks = [
   { href: "#", icon: InstagramLogo, label: "Instagram" },
@@ -40,57 +31,25 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-zinc-950 text-zinc-400">
-      {/* Newsletter strip */}
-      <div className="border-b border-zinc-800">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-12 md:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
-                Better nutrition starts here.
-              </h3>
-              <p className="mt-2 text-zinc-500 text-base leading-relaxed max-w-md">
-                Weekly recipes, nutrition insights, and exclusive offers. No spam, unsubscribe anytime.
-              </p>
-            </div>
-            <form className="flex gap-3 max-w-md md:ml-auto" onSubmit={(e) => e.preventDefault()}>
-              <div className="relative flex-1">
-                <EnvelopeSimple
-                  size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
-                />
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="w-full pl-11 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-full text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-teal-500 transition-colors"
-                />
-              </div>
-              <button
-                type="submit"
-                className="px-6 py-3 bg-teal-600 text-white text-sm font-semibold rounded-full hover:bg-teal-700 transition-colors active:scale-[0.98] shrink-0"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
+    <footer className="bg-[#1A1A1A]">
+      {/* Horizon line top */}
+      <div className="horizon-line" />
 
-      {/* Links grid */}
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8 pt-14 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           {/* Brand column */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-teal-600 flex items-center justify-center">
-                <span className="text-white font-bold text-xs">P</span>
-              </div>
-              <span className="text-base font-bold text-white tracking-tight">
-                Pepto<span className="text-teal-500">Meal</span>
+          <div className="md:col-span-4">
+            <Link href="/" className="inline-flex items-baseline gap-0.5">
+              <span className="text-2xl sm:text-3xl font-black tracking-tighter text-white">
+                PEPTO
+              </span>
+              <span className="text-2xl sm:text-3xl font-black tracking-tighter text-[#006D77]">
+                MEALS
               </span>
             </Link>
-            <p className="mt-4 text-sm text-zinc-500 leading-relaxed max-w-xs">
-              Better nutrition made simple. Premium all-in-one nutritional shakes for busy, health-conscious adults.
+            <p className="mt-4 text-sm text-zinc-400 leading-relaxed max-w-xs">
+              Premium all-in-one nutritional shakes for busy, health-conscious
+              adults. Better nutrition, made simple.
             </p>
             <div className="flex gap-3 mt-6">
               {socialLinks.map((social) => {
@@ -100,7 +59,7 @@ export function Footer() {
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="w-9 h-9 rounded-full bg-zinc-900 flex items-center justify-center hover:bg-zinc-800 transition-colors"
+                    className="w-9 h-9 rounded-full bg-[#2D2D2D] flex items-center justify-center text-zinc-400 hover:text-[#FFB703] hover:bg-[#2D2D2D]/80 transition-colors"
                   >
                     <Icon size={18} weight="fill" />
                   </a>
@@ -109,17 +68,17 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Shop */}
-          <div>
-            <h4 className="text-sm font-semibold text-white tracking-wide uppercase mb-4">
-              Shop
+          {/* Shop links */}
+          <div className="md:col-span-2">
+            <h4 className="text-xs font-bold tracking-widest text-[#FFB703] uppercase mb-4">
+              SHOP
             </h4>
             <ul className="space-y-2.5">
-              {footerLinks.shop.map((link) => (
+              {shopLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-teal-400 transition-colors"
+                    className="text-sm text-zinc-400 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -128,17 +87,17 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Learn */}
-          <div>
-            <h4 className="text-sm font-semibold text-white tracking-wide uppercase mb-4">
-              Learn
+          {/* Learn links */}
+          <div className="md:col-span-2">
+            <h4 className="text-xs font-bold tracking-widest text-[#FFB703] uppercase mb-4">
+              LEARN
             </h4>
             <ul className="space-y-2.5">
-              {footerLinks.learn.map((link) => (
+              {learnLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-teal-400 transition-colors"
+                    className="text-sm text-zinc-400 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -147,41 +106,59 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
-          <div>
-            <h4 className="text-sm font-semibold text-white tracking-wide uppercase mb-4">
-              Company
+          {/* Newsletter */}
+          <div className="md:col-span-4">
+            <h4 className="text-xs font-bold tracking-widest text-[#FFB703] uppercase mb-4">
+              NEWSLETTER
             </h4>
-            <ul className="space-y-2.5">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm hover:text-teal-400 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <p className="text-sm text-zinc-400 leading-relaxed mb-4">
+              Recipes, nutrition tips, and exclusive offers. No spam, unsubscribe
+              anytime.
+            </p>
+            <form
+              className="flex"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="email"
+                placeholder="Your email"
+                className="flex-1 min-w-0 px-5 py-3 bg-[#2D2D2D] text-sm text-white placeholder:text-zinc-500 rounded-l-full border-none focus:outline-none focus:ring-2 focus:ring-[#006D77]"
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 bg-[#006D77] text-white text-xs font-bold tracking-wider uppercase rounded-r-full hover:bg-[#006D77]/90 transition-colors shrink-0"
+              >
+                JOIN
+              </button>
+            </form>
           </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-zinc-800">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Horizon line divider */}
+        <div className="horizon-line mt-12 mb-8" />
+
+        {/* Bottom bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-zinc-600">
-            &copy; {new Date().getFullYear()} PeptoMeal. All rights reserved.
+            &copy; {new Date().getFullYear()} PeptoMeals. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+            <Link
+              href="/privacy"
+              className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
+            >
               Privacy
             </Link>
-            <Link href="/terms" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+            <Link
+              href="/terms"
+              className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
+            >
               Terms
             </Link>
-            <Link href="/shipping" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+            <Link
+              href="/shipping"
+              className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
+            >
               Shipping
             </Link>
           </div>

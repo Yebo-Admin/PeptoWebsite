@@ -1,83 +1,151 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Star } from "@phosphor-icons/react";
-import { testimonials } from "@/data/testimonials";
-import Link from "next/link";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Star, Quotes, CaretLeft, CaretRight } from "@phosphor-icons/react";
 
-const featured = testimonials.slice(0, 3);
+const testimonials = [
+  {
+    id: 1,
+    quote:
+      "I replaced my morning cereal with PeptoMeal three months ago. More energy, better focus, and I've dropped two belt sizes without even trying. This stuff is the real deal.",
+    name: "Thabo M.",
+    label: "VERIFIED BUYER",
+    rating: 5,
+  },
+  {
+    id: 2,
+    quote:
+      "As a mom of three, I never had time for a proper breakfast. PeptoMeal gives me everything I need in 30 seconds. My kids even steal sips of my Chocolate Treat!",
+    name: "Lerato K.",
+    label: "VERIFIED BUYER",
+    rating: 5,
+  },
+  {
+    id: 3,
+    quote:
+      "I'm a trail runner and I use Caramel Latte as my pre-run fuel. 30 grams of plant protein, tastes incredible, and my recovery times have improved dramatically.",
+    name: "James P.",
+    label: "VERIFIED BUYER",
+    rating: 5,
+  },
+  {
+    id: 4,
+    quote:
+      "Finally a meal replacement that doesn't taste like cardboard. The Berry Blast is genuinely delicious. I look forward to it every single morning.",
+    name: "Naledi S.",
+    label: "VERIFIED BUYER",
+    rating: 5,
+  },
+];
 
 export function SocialProof() {
+  const [current, setCurrent] = useState(0);
+
+  const prev = () =>
+    setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1));
+  const next = () =>
+    setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
+
+  const t = testimonials[current];
+
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-24 bg-[#F1F1E6]">
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-14"
+          className="text-center mb-16"
         >
-          <span className="text-xs font-semibold text-teal-600 uppercase tracking-widest">
-            Real People. Real Results.
-          </span>
-          <h2 className="mt-4 text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900">
-            Trusted by thousands of
-            <br />
-            South Africans.
+          <p className="text-xs font-bold tracking-[0.3em] text-[#006D77] uppercase mb-4">
+            REAL RESULTS
+          </p>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-[#1A1A1A]">
+            WHAT THEY <span className="text-[#FFB703]">SAY</span>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featured.map((testimonial, index) => (
+        {/* Testimonial carousel */}
+        <div className="max-w-3xl mx-auto text-center">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={testimonial.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-6 md:p-8 bg-zinc-50 rounded-[1.5rem] border border-zinc-100"
+              key={t.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
             >
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
+              {/* Quote icon */}
+              <Quotes
+                size={48}
+                weight="fill"
+                className="text-[#006D77]/20 mx-auto mb-6"
+              />
+
+              {/* Stars */}
+              <div className="flex justify-center gap-1 mb-6">
+                {Array.from({ length: t.rating }).map((_, i) => (
                   <Star
                     key={i}
-                    size={16}
+                    size={20}
                     weight="fill"
-                    className="text-gold-500"
+                    className="text-[#FFB703]"
                   />
                 ))}
               </div>
-              <p className="text-base text-zinc-700 leading-relaxed">
-                &ldquo;{testimonial.quote}&rdquo;
-              </p>
-              <div className="flex items-center gap-3 mt-6 pt-6 border-t border-zinc-200/60">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <div>
-                  <p className="text-sm font-semibold text-zinc-900">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-xs text-zinc-500">
-                    {testimonial.role}, {testimonial.location}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
 
-        <div className="text-center mt-10">
-          <Link
-            href="/testimonials"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors"
-          >
-            Read All Reviews
-            <span aria-hidden="true">&rarr;</span>
-          </Link>
+              {/* Quote text */}
+              <p className="text-xl sm:text-2xl font-light italic text-[#1A1A1A]/80 leading-relaxed">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+
+              {/* Author */}
+              <p className="mt-8 text-lg font-black text-[#1A1A1A] tracking-tight">
+                {t.name}
+              </p>
+              <p className="text-xs font-bold tracking-[0.3em] text-[#006D77] uppercase mt-1">
+                {t.label}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation */}
+          <div className="flex items-center justify-center gap-4 mt-10">
+            <button
+              onClick={prev}
+              className="w-12 h-12 rounded-full border-2 border-[#1A1A1A]/15 flex items-center justify-center hover:border-[#006D77] hover:text-[#006D77] transition-colors text-[#1A1A1A]/50"
+              aria-label="Previous testimonial"
+            >
+              <CaretLeft size={20} weight="bold" />
+            </button>
+
+            {/* Dot indicators */}
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "bg-[#006D77] w-8"
+                      : "bg-[#1A1A1A]/15 hover:bg-[#1A1A1A]/30"
+                  }`}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={next}
+              className="w-12 h-12 rounded-full border-2 border-[#1A1A1A]/15 flex items-center justify-center hover:border-[#006D77] hover:text-[#006D77] transition-colors text-[#1A1A1A]/50"
+              aria-label="Next testimonial"
+            >
+              <CaretRight size={20} weight="bold" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

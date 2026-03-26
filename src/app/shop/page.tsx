@@ -4,23 +4,20 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Funnel, ShoppingBag } from "@phosphor-icons/react";
+import { Star, ShoppingBag } from "@phosphor-icons/react";
 import { products, type Product } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
 
-type Filter = "all" | "bestsellers" | "shakes" | "bundles";
+type Filter = "all" | "shakes" | "bundles";
 
 const filters: { value: Filter; label: string }[] = [
-  { value: "all", label: "All Flavours" },
-  { value: "bestsellers", label: "Customer Favourites" },
-  { value: "shakes", label: "Shakes" },
-  { value: "bundles", label: "Bundles" },
+  { value: "all", label: "ALL" },
+  { value: "shakes", label: "SHAKES" },
+  { value: "bundles", label: "BUNDLES" },
 ];
 
 function filterProducts(filter: Filter): Product[] {
   switch (filter) {
-    case "bestsellers":
-      return products.filter((p) => p.isBestseller);
     case "shakes":
       return products.filter((p) => p.category === "shake");
     case "bundles":
@@ -37,39 +34,51 @@ export default function ShopPage() {
   const filtered = filterProducts(activeFilter);
 
   return (
-    <>
-      {/* Hero */}
-      <section className="pt-16 pb-10 md:pt-20 md:pb-14 bg-zinc-50">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+    <div className="bg-[#F1F1E6]">
+      {/* Dark Header */}
+      <section className="relative bg-[#1A1A1A] pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
+        {/* Ghost text */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+          <span className="text-[20vw] font-black text-white opacity-[0.04] tracking-tighter leading-none">
+            SHOP
+          </span>
+        </div>
+
+        <div className="relative max-w-[1400px] mx-auto px-4 md:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900">
-              Shop PeptoMeal
+            <p className="text-xs font-bold tracking-[0.3em] text-[#FFB703] uppercase mb-4">
+              ALL PRODUCTS
+            </p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white">
+              FIND YOUR{" "}
+              <span className="text-[#006D77]">FUEL</span>
             </h1>
-            <p className="mt-3 text-lg text-zinc-500 max-w-lg">
-              Delicious flavours. Complete nutrition. R50 per sachet.
+            <p className="mt-4 text-base text-white/50 max-w-md mx-auto">
+              Delicious flavours. Complete nutrition. Subscribe and save on every order.
             </p>
           </motion.div>
         </div>
+
+        <div className="horizon-line mt-16" />
       </section>
 
       {/* Filters + Grid */}
-      <section className="py-10 md:py-16 bg-white">
+      <section className="py-12 md:py-20">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
           {/* Filter tabs */}
-          <div className="flex items-center gap-2 mb-10 overflow-x-auto pb-2">
-            <Funnel size={18} className="text-zinc-400 shrink-0" />
+          <div className="flex items-center justify-center gap-2 mb-12">
             {filters.map((filter) => (
               <button
                 key={filter.value}
                 onClick={() => setActiveFilter(filter.value)}
-                className={`px-4 py-2 text-sm font-medium rounded-full whitespace-nowrap transition-all ${
+                className={`px-5 py-2 text-[11px] font-bold tracking-wider rounded-full whitespace-nowrap transition-all ${
                   activeFilter === filter.value
-                    ? "bg-teal-600 text-white"
-                    : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+                    ? "bg-[#006D77] text-white"
+                    : "bg-white text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 {filter.label}
@@ -87,96 +96,100 @@ export default function ShopPage() {
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {filtered.map((product) => (
-                <div
+              {filtered.map((product, index) => (
+                <motion.div
                   key={product.id}
-                  className="group bg-white rounded-[1.5rem] overflow-hidden border border-zinc-100 hover:border-zinc-200 transition-all hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.06)]"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group bg-white rounded-2xl overflow-hidden border border-transparent hover:border-[#006D77]/10 transition-all hover:shadow-xl"
                 >
-                  {product.badge && (
-                    <span className="absolute top-4 left-4 z-10 px-3 py-1 bg-teal-600 text-white text-[11px] font-semibold rounded-full tracking-wide">
-                      {product.badge}
-                    </span>
-                  )}
                   <Link href={`/products/${product.slug}`}>
-                    <div className="relative aspect-square bg-zinc-100 overflow-hidden">
+                    <div className="relative aspect-[3/4] bg-[#F1F1E6] overflow-hidden">
                       <Image
                         src={product.image}
-                        alt={`PeptoMeal ${product.flavour}`}
+                        alt={`PeptoMeal ${product.name}`}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
+                      {/* Badge */}
+                      {product.badge && (
+                        <span className="absolute top-4 left-4 z-10 px-3 py-1 bg-[#006D77] text-white text-[11px] font-bold rounded-full tracking-wider">
+                          {product.badge}
+                        </span>
+                      )}
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-[#1A1A1A]/0 group-hover:bg-[#1A1A1A]/20 transition-colors duration-300 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+                        <span className="px-6 py-2.5 bg-white text-[#1A1A1A] text-xs font-bold tracking-wider rounded-full">
+                          VIEW PRODUCT
+                        </span>
+                      </div>
                     </div>
                   </Link>
+
                   <div className="p-5">
+                    {/* Star ratings */}
+                    <div className="flex items-center gap-1.5 mb-2">
+                      <div className="flex gap-0.5">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star
+                            key={i}
+                            size={12}
+                            weight="fill"
+                            className={
+                              i < Math.round(product.rating)
+                                ? "text-[#FFB703]"
+                                : "text-gray-200"
+                            }
+                          />
+                        ))}
+                      </div>
+                      <span className="text-[11px] text-gray-400">
+                        ({product.reviewCount})
+                      </span>
+                    </div>
+
                     <Link href={`/products/${product.slug}`}>
-                      <h3 className="font-bold text-zinc-900 tracking-tight text-lg">
-                        {product.flavour}
+                      <h3 className="font-black text-[#1A1A1A] tracking-tight text-lg">
+                        {product.name}
                       </h3>
-                      <p className="text-sm text-zinc-500 mt-1 line-clamp-2">
-                        {product.shortDescription}
+                      <p className="text-sm text-gray-500 mt-1 line-clamp-1">
+                        {product.tagline}
                       </p>
                     </Link>
-                    <div className="mt-4 flex flex-wrap gap-2 text-xs text-zinc-400">
-                      <span>{product.nutrition.calories} cal</span>
-                      <span aria-hidden="true">&middot;</span>
-                      <span>{product.nutrition.protein} protein</span>
-                      <span aria-hidden="true">&middot;</span>
-                      <span>{product.nutrition.vitamins} vitamins</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-5 pt-4 border-t border-zinc-100">
-                      <span className="text-xl font-bold text-zinc-900">
-                        {product.priceDisplay}
-                      </span>
+
+                    {/* Pricing */}
+                    <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+                      <div>
+                        <span className="text-lg font-black text-[#1A1A1A]">
+                          R{product.subscriptionPrice}
+                        </span>
+                        <span className="text-sm text-gray-400 line-through ml-2">
+                          R{product.price}
+                        </span>
+                        <p className="text-[10px] font-bold tracking-wider text-[#006D77] uppercase">
+                          Subscribe & Save
+                        </p>
+                      </div>
                       <button
-                        onClick={() => addItem(product)}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 text-white text-sm font-semibold rounded-full hover:bg-teal-700 transition-colors active:scale-[0.98]"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          addItem(product);
+                        }}
+                        className="w-10 h-10 rounded-full bg-[#FFB703] hover:bg-[#FFC733] text-[#1A1A1A] flex items-center justify-center transition-all active:scale-95"
+                        aria-label={`Add ${product.name} to cart`}
                       >
-                        <ShoppingBag size={16} weight="bold" />
-                        Add to Cart
+                        <ShoppingBag size={18} weight="bold" />
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
           </AnimatePresence>
-
-          {/* Nutrition banner */}
-          <div className="mt-16 p-8 md:p-12 bg-zinc-50 rounded-[2rem] border border-zinc-100">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold tracking-tighter text-zinc-900">
-                  What&apos;s inside every sachet
-                </h3>
-                <p className="mt-3 text-base text-zinc-500 leading-relaxed">
-                  Every PeptoMeal flavour shares the same complete nutritional foundation — so you never have to choose between taste and nutrition.
-                </p>
-                <Link
-                  href="/about"
-                  className="inline-flex items-center gap-1.5 mt-6 text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors"
-                >
-                  Learn about our science &rarr;
-                </Link>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { value: "15.3g", label: "High-quality protein" },
-                  { value: "4.3g", label: "Dietary fibre" },
-                  { value: "24", label: "Vitamins & minerals" },
-                  { value: "110", label: "Calories per serving" },
-                ].map((stat) => (
-                  <div key={stat.label} className="p-4 bg-white rounded-xl border border-zinc-100">
-                    <p className="text-2xl font-bold text-teal-700 tracking-tight">
-                      {stat.value}
-                    </p>
-                    <p className="text-xs text-zinc-500 mt-1">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

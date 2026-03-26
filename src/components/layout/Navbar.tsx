@@ -1,60 +1,175 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ShoppingBag,
-  List,
-  X,
-  Flask,
-  BookOpen,
-  Microphone,
-  ChatCircleDots,
-  Question,
-  Phone,
-  Storefront,
-} from "@phosphor-icons/react";
+import { List, X, ShoppingBag } from "@phosphor-icons/react";
 import { useCart } from "@/lib/cart-context";
 
-const navLinks = [
-  { href: "/shop", label: "Shop", icon: Storefront },
-  { href: "/about", label: "Our Science", icon: Flask },
-  { href: "/recipes", label: "Recipes", icon: BookOpen },
-  { href: "/testimonials", label: "Reviews", icon: ChatCircleDots },
-  { href: "/podcast", label: "Podcast", icon: Microphone },
-  { href: "/blog", label: "Journal", icon: BookOpen },
-  { href: "/faq", label: "FAQ", icon: Question },
-  { href: "/contact", label: "Contact", icon: Phone },
+const NAV_LINKS = [
+  { href: "/", label: "HOME" },
+  { href: "/shop", label: "SHOP" },
+  { href: "/recipes", label: "RECIPES" },
+  { href: "/about", label: "ABOUT" },
+  { href: "/faq", label: "FAQ" },
+];
+
+const SHOP_PRODUCTS = [
+  {
+    flavor: "Chocolate Treat",
+    image:
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/bf267524c_generated_1c1e7647.png",
+  },
+  {
+    flavor: "Vanilla Swirl",
+    image:
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/b27df8a36_generated_14b89d36.png",
+  },
+  {
+    flavor: "Caramel Latte",
+    image:
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/4d52fd9a1_generated_96b4a5cd.png",
+  },
+  {
+    flavor: "Berry Blast",
+    image:
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/696ee3ef5_generated_b73cdcb6.png",
+  },
 ];
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(false);
+  const pathname = usePathname();
   const { totalItems, setIsOpen } = useCart();
 
+  const isHome = pathname === "/";
+  const isTransparent = isHome && !scrolled;
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
-    <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-zinc-200/60">
+    <nav
+      className={`sticky top-0 z-40 transition-all duration-300 ${
+        isTransparent
+          ? "bg-transparent"
+          : "bg-white/95 backdrop-blur-md border-b border-zinc-200/60"
+      }`}
+    >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between px-4 md:px-8 h-16 md:h-18">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center">
-            <span className="text-white font-bold text-sm tracking-tight">P</span>
-          </div>
-          <span className="text-lg font-bold tracking-tight text-zinc-900">
-            Pepto<span className="text-teal-600">Meal</span>
+        <Link href="/" className="flex items-baseline gap-0.5 group">
+          <span
+            className={`text-2xl sm:text-3xl font-black tracking-tighter transition-colors ${
+              isTransparent ? "text-white" : "text-[#1A1A1A]"
+            }`}
+          >
+            PEPTO
+          </span>
+          <span
+            className={`text-2xl sm:text-3xl font-black tracking-tighter transition-colors ${
+              isTransparent ? "text-[#FFB703]" : "text-[#006D77]"
+            }`}
+          >
+            MEALS
           </span>
         </Link>
 
         {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-1">
-          {navLinks.slice(0, 6).map((link) => (
-            <Link
+          {NAV_LINKS.map((link) => (
+            <div
               key={link.href}
-              href={link.href}
-              className="px-3.5 py-2 text-sm font-medium text-zinc-600 rounded-lg hover:text-zinc-900 hover:bg-zinc-100/60 transition-all"
+              className="relative"
+              onMouseEnter={
+                link.label === "SHOP" ? () => setMegaOpen(true) : undefined
+              }
+              onMouseLeave={
+                link.label === "SHOP" ? () => setMegaOpen(false) : undefined
+              }
             >
-              {link.label}
-            </Link>
+              <Link
+                href={link.href}
+                className={`px-3.5 py-2 text-xs font-semibold tracking-widest rounded-lg transition-all ${
+                  isTransparent
+                    ? "text-white/90 hover:text-white hover:bg-white/10"
+                    : "text-[#1A1A1A]/70 hover:text-[#1A1A1A] hover:bg-zinc-100/60"
+                } ${pathname === link.href ? (isTransparent ? "text-white" : "text-[#1A1A1A]") : ""}`}
+              >
+                {link.label}
+              </Link>
+
+              {/* Mega menu for SHOP */}
+              {link.label === "SHOP" && (
+                <AnimatePresence>
+                  {megaOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-1/2 -translate-x-1/2 top-full pt-2"
+                    >
+                      <div className="bg-white rounded-2xl shadow-2xl border border-zinc-100 p-6 w-[520px]">
+                        <p className="text-xs font-bold tracking-[0.3em] text-[#006D77] uppercase mb-4">
+                          OUR FLAVOURS
+                        </p>
+                        <div className="grid grid-cols-4 gap-4">
+                          {SHOP_PRODUCTS.map((product) => (
+                            <Link
+                              key={product.flavor}
+                              href="/shop"
+                              className="group/card flex flex-col items-center gap-2"
+                              onClick={() => setMegaOpen(false)}
+                            >
+                              <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-[#F1F1E6]">
+                                <Image
+                                  src={product.image}
+                                  alt={product.flavor}
+                                  fill
+                                  className="object-cover group-hover/card:scale-105 transition-transform duration-300"
+                                />
+                              </div>
+                              <span className="text-[10px] font-bold tracking-[0.2em] text-[#1A1A1A] uppercase text-center">
+                                {product.flavor}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                        <div className="horizon-line mt-5 mb-3" />
+                        <Link
+                          href="/shop"
+                          onClick={() => setMegaOpen(false)}
+                          className="block text-center text-xs font-bold tracking-[0.3em] text-[#006D77] hover:text-[#FFB703] transition-colors uppercase"
+                        >
+                          VIEW ALL FLAVOURS
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
+            </div>
           ))}
         </div>
 
@@ -62,22 +177,34 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href="/shop"
-            className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 text-white text-sm font-semibold rounded-full hover:bg-teal-700 transition-colors active:scale-[0.98]"
+            className={`hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-wider uppercase rounded-full transition-colors active:scale-[0.98] ${
+              isTransparent
+                ? "bg-[#FFB703] text-[#1A1A1A] hover:bg-[#FFB703]/90"
+                : "bg-[#006D77] text-white hover:bg-[#006D77]/90"
+            }`}
           >
-            Shop Now
+            SHOP NOW
           </Link>
 
           <button
             onClick={() => setIsOpen(true)}
-            className="relative p-2.5 rounded-full hover:bg-zinc-100 transition-colors"
+            className={`relative p-2.5 rounded-full transition-colors ${
+              isTransparent
+                ? "hover:bg-white/10"
+                : "hover:bg-zinc-100"
+            }`}
             aria-label="Open cart"
           >
-            <ShoppingBag size={22} weight="duotone" className="text-zinc-700" />
+            <ShoppingBag
+              size={22}
+              weight="duotone"
+              className={isTransparent ? "text-white" : "text-[#1A1A1A]"}
+            />
             {totalItems > 0 && (
               <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-teal-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center"
+                className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-[#FFB703] text-[#1A1A1A] text-[10px] font-bold rounded-full flex items-center justify-center"
               >
                 {totalItems}
               </motion.span>
@@ -86,69 +213,93 @@ export function Navbar() {
 
           <button
             onClick={() => setMobileOpen(true)}
-            className="lg:hidden p-2.5 rounded-full hover:bg-zinc-100 transition-colors"
+            className={`lg:hidden p-2.5 rounded-full transition-colors ${
+              isTransparent
+                ? "hover:bg-white/10"
+                : "hover:bg-zinc-100"
+            }`}
             aria-label="Open menu"
           >
-            <List size={22} weight="bold" className="text-zinc-700" />
+            <List
+              size={22}
+              weight="bold"
+              className={isTransparent ? "text-white" : "text-[#1A1A1A]"}
+            />
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile full-screen menu overlay */}
       <AnimatePresence>
         {mobileOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 bg-zinc-950/40 backdrop-blur-sm"
-              onClick={() => setMobileOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed right-0 top-0 bottom-0 z-50 w-[85vw] max-w-sm bg-white shadow-2xl"
-            >
-              <div className="flex items-center justify-between p-4 border-b border-zinc-100">
-                <span className="font-bold text-zinc-900 tracking-tight">Menu</span>
-                <button
-                  onClick={() => setMobileOpen(false)}
-                  className="p-2 rounded-full hover:bg-zinc-100 transition-colors"
-                  aria-label="Close menu"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-white flex flex-col"
+          >
+            {/* Mobile menu header */}
+            <div className="flex items-center justify-between px-4 md:px-8 h-16">
+              <Link
+                href="/"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-baseline gap-0.5"
+              >
+                <span className="text-2xl sm:text-3xl font-black tracking-tighter text-[#1A1A1A]">
+                  PEPTO
+                </span>
+                <span className="text-2xl sm:text-3xl font-black tracking-tighter text-[#006D77]">
+                  MEALS
+                </span>
+              </Link>
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="p-2.5 rounded-full hover:bg-zinc-100 transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={24} weight="bold" className="text-[#1A1A1A]" />
+              </button>
+            </div>
+
+            <div className="horizon-line" />
+
+            {/* Mobile nav links */}
+            <div className="flex-1 flex flex-col justify-center px-8 gap-2">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + i * 0.06, duration: 0.3 }}
                 >
-                  <X size={20} weight="bold" />
-                </button>
-              </div>
-              <div className="flex flex-col p-4 gap-1">
-                {navLinks.map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="flex items-center gap-3 px-4 py-3 text-base font-medium text-zinc-700 rounded-xl hover:bg-zinc-50 transition-colors"
-                    >
-                      <Icon size={20} weight="duotone" className="text-teal-600" />
-                      {link.label}
-                    </Link>
-                  );
-                })}
-              </div>
-              <div className="p-4 mt-auto">
-                <Link
-                  href="/shop"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center w-full py-3.5 bg-teal-600 text-white font-semibold rounded-full hover:bg-teal-700 transition-colors"
-                >
-                  Shop Now
-                </Link>
-              </div>
-            </motion.div>
-          </>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block text-4xl font-black tracking-tighter py-2 transition-colors ${
+                      pathname === link.href
+                        ? "text-[#006D77]"
+                        : "text-[#1A1A1A] hover:text-[#006D77]"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Mobile menu footer */}
+            <div className="px-8 pb-10">
+              <div className="horizon-line mb-6" />
+              <Link
+                href="/shop"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center w-full py-4 bg-[#FFB703] text-[#1A1A1A] text-sm font-bold tracking-wider uppercase rounded-full hover:bg-[#FFB703]/90 transition-colors active:scale-[0.98]"
+              >
+                SHOP NOW
+              </Link>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </nav>

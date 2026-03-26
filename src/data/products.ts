@@ -1,200 +1,198 @@
 export interface Product {
   id: string;
   name: string;
-  flavour: string;
+  flavor: string;
   slug: string;
-  price: number; // in ZAR cents
+  tagline: string;
+  price: number;
+  subscriptionPrice: number;
   priceDisplay: string;
   description: string;
-  shortDescription: string;
   image: string;
   images: string[];
   badge?: string;
   category: "shake" | "bundle";
-  nutrition: {
-    calories: number;
-    protein: string;
-    fibre: string;
-    sugar: string;
-    servingSize: string;
-    vitamins: number;
-  };
-  ingredients?: string;
+  rating: number;
+  reviewCount: number;
   isBestseller?: boolean;
   isNew?: boolean;
+  proteinG: number;
+  servings: number;
+  calories: number;
+  benefits: string[];
+  ingredients: string;
 }
 
 export const products: Product[] = [
   {
-    id: "pm-choc-caramel",
-    name: "PeptoMeal Nutritional Shake",
-    flavour: "Chocolate Caramel",
-    slug: "chocolate-caramel",
-    price: 5000,
-    priceDisplay: "R50",
+    id: "pm-choc-treat",
+    name: "Chocolate Treat",
+    flavor: "Chocolate Treat",
+    slug: "chocolate-treat",
+    tagline: "Rich cocoa with a smooth finish",
+    price: 349,
+    subscriptionPrice: 299,
+    priceDisplay: "R299",
     description:
-      "Rich chocolate meets buttery caramel in this indulgent shake that delivers complete daily nutrition. Packed with 15.3g of high-quality protein, synbiotics for gut health, and 24 essential vitamins and minerals — all in just 110 calories.",
-    shortDescription: "Rich chocolate meets buttery caramel. Complete nutrition in every sip.",
-    image: "https://picsum.photos/seed/pepto-choc/600/600",
+      "Indulgent chocolate flavour that delivers complete daily nutrition. 30g plant protein, 85+ superfoods, prebiotics and probiotics for gut health, and 15 essential vitamins and minerals. Zero compromise on taste.",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/bf267524c_generated_1c1e7647.png",
     images: [
-      "https://picsum.photos/seed/pepto-choc/600/600",
-      "https://picsum.photos/seed/pepto-choc-2/600/600",
-      "https://picsum.photos/seed/pepto-choc-3/600/600",
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/bf267524c_generated_1c1e7647.png",
     ],
-    badge: "Bestseller",
+    badge: "BESTSELLER",
     category: "shake",
-    nutrition: {
-      calories: 110,
-      protein: "15.3g",
-      fibre: "4.3g",
-      sugar: "5.7g",
-      servingSize: "33g",
-      vitamins: 24,
-    },
+    rating: 4.8,
+    reviewCount: 142,
     isBestseller: true,
+    proteinG: 30,
+    servings: 15,
+    calories: 220,
+    benefits: [
+      "30g complete plant protein per serving",
+      "85+ superfoods for whole-body nutrition",
+      "Prebiotics & live probiotics for gut health",
+      "15 essential vitamins & minerals",
+      "No GMO, gluten, soy, or artificial ingredients",
+      "Supports muscle recovery & lasting satiety",
+    ],
+    ingredients:
+      "Pea protein isolate, brown rice protein, organic cocoa powder, MCT oil powder, flaxseed meal, chia seed powder, acacia fibre, probiotic blend (Lactobacillus acidophilus, Bifidobacterium lactis), vitamin & mineral premix, natural chocolate flavour, monk fruit extract, sea salt.",
+  },
+  {
+    id: "pm-vanilla-swirl",
+    name: "Vanilla Swirl",
+    flavor: "Vanilla Swirl",
+    slug: "vanilla-swirl",
+    tagline: "Classic vanilla, silky smooth",
+    price: 349,
+    subscriptionPrice: 299,
+    priceDisplay: "R299",
+    description:
+      "Smooth vanilla bean flavour that works on its own or blends into any recipe. 30g plant protein, 85+ superfoods, and a complete micronutrient profile. The most versatile flavour in the range.",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/b27df8a36_generated_14b89d36.png",
+    images: [
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/b27df8a36_generated_14b89d36.png",
+    ],
+    category: "shake",
+    rating: 4.7,
+    reviewCount: 98,
+    proteinG: 30,
+    servings: 15,
+    calories: 220,
+    benefits: [
+      "30g complete plant protein per serving",
+      "85+ superfoods for whole-body nutrition",
+      "Prebiotics & live probiotics for gut health",
+      "15 essential vitamins & minerals",
+      "Mixes smoothly with water or plant milk",
+      "Perfect base for smoothie bowls and recipes",
+    ],
+    ingredients:
+      "Pea protein isolate, brown rice protein, MCT oil powder, flaxseed meal, chia seed powder, acacia fibre, probiotic blend (Lactobacillus acidophilus, Bifidobacterium lactis), vitamin & mineral premix, natural vanilla flavour, monk fruit extract, sea salt.",
   },
   {
     id: "pm-caramel-latte",
-    name: "PeptoMeal Nutritional Shake",
-    flavour: "Caramel Latte",
+    name: "Caramel Latte",
+    flavor: "Caramel Latte",
     slug: "caramel-latte",
-    price: 5000,
-    priceDisplay: "R50",
+    tagline: "Coffee meets caramel indulgence",
+    price: 349,
+    subscriptionPrice: 299,
+    priceDisplay: "R299",
     description:
-      "Your morning coffee ritual, upgraded. Smooth caramel latte flavour with a complete nutritional profile — protein, fibre, omega-3, synbiotics, and 24 vitamins and minerals to power your day.",
-    shortDescription: "Your morning coffee ritual, upgraded with complete nutrition.",
-    image: "https://picsum.photos/seed/pepto-latte/600/600",
+      "Your morning coffee ritual, upgraded. Smooth caramel latte flavour with 30g plant protein, 85+ superfoods, and complete gut health support. The perfect way to start any day.",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/4d52fd9a1_generated_96b4a5cd.png",
     images: [
-      "https://picsum.photos/seed/pepto-latte/600/600",
-      "https://picsum.photos/seed/pepto-latte-2/600/600",
-      "https://picsum.photos/seed/pepto-latte-3/600/600",
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/4d52fd9a1_generated_96b4a5cd.png",
     ],
-    badge: "Popular",
+    badge: "POPULAR",
     category: "shake",
-    nutrition: {
-      calories: 110,
-      protein: "15.3g",
-      fibre: "4.3g",
-      sugar: "5.7g",
-      servingSize: "33g",
-      vitamins: 24,
-    },
-    isBestseller: true,
+    rating: 4.9,
+    reviewCount: 87,
+    proteinG: 30,
+    servings: 15,
+    calories: 220,
+    benefits: [
+      "30g complete plant protein per serving",
+      "85+ superfoods for whole-body nutrition",
+      "Prebiotics & live probiotics for gut health",
+      "15 essential vitamins & minerals",
+      "Natural caffeine from green coffee extract",
+      "Supports energy, focus, and recovery",
+    ],
+    ingredients:
+      "Pea protein isolate, brown rice protein, MCT oil powder, green coffee extract, flaxseed meal, chia seed powder, acacia fibre, probiotic blend, vitamin & mineral premix, natural caramel flavour, natural coffee flavour, monk fruit extract, sea salt.",
   },
   {
-    id: "pm-jelly-tots",
-    name: "PeptoMeal Nutritional Shake",
-    flavour: "Jelly Tots",
-    slug: "jelly-tots",
-    price: 5000,
-    priceDisplay: "R50",
+    id: "pm-berry-blast",
+    name: "Berry Blast",
+    flavor: "Berry Blast",
+    slug: "berry-blast",
+    tagline: "Bright berry, antioxidant rich",
+    price: 349,
+    subscriptionPrice: 299,
+    priceDisplay: "R299",
     description:
-      "Nostalgic sweetness meets serious nutrition. The Jelly Tots flavour brings a playful twist to your daily shake routine — with the same complete nutritional foundation you trust.",
-    shortDescription: "Nostalgic sweetness meets serious nutrition. A playful daily shake.",
-    image: "https://picsum.photos/seed/pepto-jelly/600/600",
+      "Bursting with real berry flavour and loaded with antioxidants. 30g plant protein, 85+ superfoods, and gut-friendly synbiotics. Fruity, fresh, and packed with nutrition.",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/696ee3ef5_generated_b73cdcb6.png",
     images: [
-      "https://picsum.photos/seed/pepto-jelly/600/600",
-      "https://picsum.photos/seed/pepto-jelly-2/600/600",
-      "https://picsum.photos/seed/pepto-jelly-3/600/600",
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/696ee3ef5_generated_b73cdcb6.png",
     ],
-    badge: "New",
+    badge: "NEW",
     category: "shake",
-    nutrition: {
-      calories: 110,
-      protein: "15.3g",
-      fibre: "4.3g",
-      sugar: "5.7g",
-      servingSize: "33g",
-      vitamins: 24,
-    },
     isNew: true,
+    rating: 4.6,
+    reviewCount: 54,
+    proteinG: 30,
+    servings: 15,
+    calories: 220,
+    benefits: [
+      "30g complete plant protein per serving",
+      "85+ superfoods including acai and goji",
+      "Prebiotics & live probiotics for gut health",
+      "15 essential vitamins & minerals",
+      "Rich in antioxidants from real berry extracts",
+      "Naturally refreshing fruity taste",
+    ],
+    ingredients:
+      "Pea protein isolate, brown rice protein, organic berry blend (blueberry, strawberry, acai, goji), MCT oil powder, flaxseed meal, chia seed powder, acacia fibre, probiotic blend, vitamin & mineral premix, natural berry flavour, monk fruit extract, sea salt.",
   },
   {
-    id: "pm-vanilla-bean",
-    name: "PeptoMeal Nutritional Shake",
-    flavour: "Vanilla Bean",
-    slug: "vanilla-bean",
-    price: 5000,
-    priceDisplay: "R50",
+    id: "pm-starter-bundle",
+    name: "Starter Pack Bundle",
+    flavor: "Variety",
+    slug: "starter-pack",
+    tagline: "Three bestselling flavours. 45 servings.",
+    price: 899,
+    subscriptionPrice: 799,
+    priceDisplay: "R799",
     description:
-      "Classic vanilla bean with a clean, creamy finish. Versatile enough to enjoy on its own or blend into your favourite smoothie bowl. Complete nutrition, naturally delicious.",
-    shortDescription: "Classic vanilla bean. Clean, creamy, and endlessly versatile.",
-    image: "https://picsum.photos/seed/pepto-vanilla/600/600",
+      "The perfect way to discover your daily fuel. Three full-size bags of our bestselling flavours — Chocolate Treat, Vanilla Swirl, and Caramel Latte. 45 servings of complete nutrition.",
+    image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/a09f77e36_generated_ab506fa8.png",
     images: [
-      "https://picsum.photos/seed/pepto-vanilla/600/600",
-      "https://picsum.photos/seed/pepto-vanilla-2/600/600",
-      "https://picsum.photos/seed/pepto-vanilla-3/600/600",
+      "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69b14cdb1d85bbd1f6940e72/a09f77e36_generated_ab506fa8.png",
     ],
-    category: "shake",
-    nutrition: {
-      calories: 110,
-      protein: "15.3g",
-      fibre: "4.3g",
-      sugar: "5.7g",
-      servingSize: "33g",
-      vitamins: 24,
-    },
-  },
-  {
-    id: "pm-strawberry",
-    name: "PeptoMeal Nutritional Shake",
-    flavour: "Strawberry",
-    slug: "strawberry",
-    price: 5000,
-    priceDisplay: "R50",
-    description:
-      "Bright, fruity strawberry flavour that makes balanced nutrition feel effortless. Same complete formula — protein, fibre, synbiotics, omega-3, and 24 vitamins and minerals.",
-    shortDescription: "Bright, fruity strawberry. Balanced nutrition made effortless.",
-    image: "https://picsum.photos/seed/pepto-straw/600/600",
-    images: [
-      "https://picsum.photos/seed/pepto-straw/600/600",
-      "https://picsum.photos/seed/pepto-straw-2/600/600",
-      "https://picsum.photos/seed/pepto-straw-3/600/600",
-    ],
-    category: "shake",
-    nutrition: {
-      calories: 110,
-      protein: "15.3g",
-      fibre: "4.3g",
-      sugar: "5.7g",
-      servingSize: "33g",
-      vitamins: 24,
-    },
-  },
-  {
-    id: "pm-discovery-box",
-    name: "PeptoMeal Discovery Box",
-    flavour: "Mixed — 5 Flavours",
-    slug: "discovery-box",
-    price: 22500,
-    priceDisplay: "R225",
-    description:
-      "Not sure which flavour is your favourite? The Discovery Box includes one sachet of every PeptoMeal flavour so you can try them all. Five sachets, five flavours, one easy decision.",
-    shortDescription: "Try every flavour. Five sachets, five flavours, one box.",
-    image: "https://picsum.photos/seed/pepto-box/600/600",
-    images: [
-      "https://picsum.photos/seed/pepto-box/600/600",
-      "https://picsum.photos/seed/pepto-box-2/600/600",
-    ],
-    badge: "Best Value",
+    badge: "BEST VALUE",
     category: "bundle",
-    nutrition: {
-      calories: 110,
-      protein: "15.3g",
-      fibre: "4.3g",
-      sugar: "5.7g",
-      servingSize: "33g",
-      vitamins: 24,
-    },
+    rating: 4.9,
+    reviewCount: 203,
+    proteinG: 30,
+    servings: 45,
+    calories: 220,
+    benefits: [
+      "Three full-size bags included",
+      "45 total servings of complete nutrition",
+      "Try all three bestselling flavours",
+      "Save R148 compared to buying individually",
+      "30-day love-it guarantee",
+      "Free shipping included",
+    ],
+    ingredients: "See individual flavour listings for full ingredient details.",
   },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
-}
-
-export function getBestsellers(): Product[] {
-  return products.filter((p) => p.isBestseller);
 }
 
 export function getShakes(): Product[] {
