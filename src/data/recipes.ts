@@ -19,7 +19,7 @@ export const recipes: Recipe[] = [
     slug: "chocolate-caramel-overnight-oats",
     description:
       "Prep in two minutes, wake up to a rich, protein-packed breakfast bowl.",
-    image: "https://picsum.photos/seed/recipe-oats/800/600",
+    image: "/recipes/chocolate-caramel-overnight-oats.png",
     prepTime: "2 min + overnight",
     flavour: "Chocolate Caramel",
     mealType: "breakfast",
@@ -45,7 +45,7 @@ export const recipes: Recipe[] = [
     slug: "iced-caramel-latte-smoothie",
     description:
       "Your afternoon pick-me-up with 15g protein. Creamy, caffeinated, done in 60 seconds.",
-    image: "https://picsum.photos/seed/recipe-latte/800/600",
+    image: "/recipes/iced-caramel-latte-smoothie.png",
     prepTime: "1 min",
     flavour: "Caramel Latte",
     mealType: "smoothie",
@@ -69,7 +69,7 @@ export const recipes: Recipe[] = [
     slug: "vanilla-protein-smoothie-bowl",
     description:
       "A thick, creamy base loaded with toppings. Breakfast that looks as good as it tastes.",
-    image: "https://picsum.photos/seed/recipe-bowl/800/600",
+    image: "/recipes/vanilla-protein-smoothie-bowl.png",
     prepTime: "5 min",
     flavour: "Vanilla",
     mealType: "breakfast",
@@ -93,7 +93,7 @@ export const recipes: Recipe[] = [
     slug: "strawberry-protein-popsicles",
     description:
       "Freeze your nutrition. Perfect for hot days and post-workout recovery.",
-    image: "https://picsum.photos/seed/recipe-popsicle/800/600",
+    image: "/recipes/strawberry-protein-popsicles.png",
     prepTime: "5 min + 4hr freeze",
     flavour: "Strawberry",
     mealType: "dessert",
@@ -119,7 +119,7 @@ export const recipes: Recipe[] = [
     slug: "cinnamon-pancake-protein-pancakes",
     description:
       "Fluffy, high-protein pancakes that taste like the real thing. Weekend breakfast, elevated.",
-    image: "https://picsum.photos/seed/recipe-pancakes/800/600",
+    image: "/recipes/cinnamon-pancake-protein-pancakes.png",
     prepTime: "15 min",
     flavour: "Cinnamon Pancake",
     mealType: "breakfast",
@@ -146,7 +146,7 @@ export const recipes: Recipe[] = [
     slug: "jelly-tots-protein-pudding",
     description:
       "A sweet, nostalgic dessert that doubles as a high-protein snack. Ready in minutes.",
-    image: "https://picsum.photos/seed/recipe-pudding/800/600",
+    image: "/recipes/jelly-tots-protein-pudding.png",
     prepTime: "3 min + 1hr chill",
     flavour: "Jelly Tots",
     mealType: "dessert",
